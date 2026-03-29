@@ -4,16 +4,21 @@
 #soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 #deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
-#colocar outras coisas aqui
+#TODO: Arrumar todos os cometários para ;
+#TODO: Arrumar todos os addis -> só r[0] recebe
+#TODO: Arrumar todos os adds -> R[ra] <- R[ra] + R[ra]
+#TODO: SÓ TEM 4 REGISTRADORES -> fazer adaptações necessárias (r0, r1, r2, r3)
 
-.data
+#QUESTION: Só tem 4 reguistradores??
+
 #QUESTION: word mesmo?
 #QUESTION: Dá para fazer isso no EGG?
-A: .word 0, 2, 4, 6, 8, 10, 12, 14, 16, 18 #vetor A
-B: .word 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 #vetor B
-R: .word 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 #vetor R zerado -> QUESTION: será que usar space dá certo?
+#QUESTION: .32 mesmo?
+A: .bits32 0 2 4 6 8 10 12 14 16 18 #vetor A
+B: .bits32 1 3 5 7 9 11 13 15 17 19 #vetor B
+R: .bits32 0 0 0 0 0 0 0 0 0 0 #vetor R zerado -> QUESTION: será que usar space dá certo?
 
-.text
+#Q: .text?
 
 main:
     
