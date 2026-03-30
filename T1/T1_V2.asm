@@ -1,17 +1,16 @@
-#TRUQUES DA ARQUITETURA
-	#Zerar registrador: Sub r1, r1
-		#Prepara para atribuições
-
 #O aluno deverá escrever, em Assembly de REDUX-V, um programa que some dois vetores de 10 posições
 #fazendo R=A+B. O código deve inicializar os vetores A, B e R. Os vetores devem iniciar logo após as
 #instruções na memória (note que REDUX-V é uma arquitetura Von Neumann). Você deve implementar a
 #soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 #deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
+#TODO: Ver se dá para imprimir com REDUX
+#TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
 #TODO: Arrumar todos os comentários para ;
-#TODO: Arrumar todos os addis -> só r[0] recebe
-#TODO: Arrumar todos os adds -> R[ra] <- R[ra] + R[ra]
-#TODO: SÓ TEM 4 REGISTRADORES -> fazer adaptações necessárias (r0, r1, r2, r3)
+
+#TRUQUES DA ARQUITETURA
+	#Zerar registrador: Sub r1, r1
+		#Prepara para atribuições
 
 #QUESTION: word mesmo?
 #QUESTION: Dá para fazer isso no EGG?
@@ -30,25 +29,6 @@ main:
 	#QUESTION: Função específica? Dentro de função inicializadora?
 	sub r3, r3		#r3 (i) = 0
 	
-	#QUESTION: acho que não dá para manter esse registrador
-	#QUESTION:Ou recebe 10? -> Qual tamanho do int em bytes?
-	addi a0, zero, 40	#a0(tam) = 10(tam do vetor) * 4(tam dos números, em bytes)
-	
-	#Atribui a ponteiros o endereço dos vetores
-
-	#r2 = &A[0]
-	sub r0, r0		#r0 = 0
-	sub r2, r2		#r2 = 0
-	addi A			#r0 = A
-	add r2, r0		#r2 = r0 (A)
-
-	#r1 = &B[0]
-	sub r0, r0
-	sub r1, r1
-	addi A
-	add r1, r0
-
-
 	#Chama função de soma_vetor
 	#QUESTION: Soma mesmo ou só desvia?
 	#QUESTION: soma_vetor ou soma e imprime?
@@ -63,40 +43,53 @@ soma_vetor:
 	#QUESTION: Aqui é a posição certa do branch -> pode ser entre incrementa iterador e percorre vetores
 		#Aqui impede soma de vetores vazios -> mas nunca vai ter
 	
-	#ìf (i == tam) "return" !!!!!!!!!!
-
+	#ìf (i == tam) desvie para "imprime"
+    #r1(aux) = tam - i
 	sub r0, r0
 	addi 40		#QUESTION: 40 ou 10? Vai ter que ser esse número constante mesmo?
+	sub r0, r3			#r0 = tam - i
+    sub r1, r1          
+    add r1, r0          #r1 = r0 (tam - i)
 
-	sub r0, r3			#r0 = 40 - i
+    ld imprime          #r0 = & de label "imprime"
 
-	brzr r0, imprime
+	brzr r1, r0
+	#-----------------------------------
 
-	#QUESTION: Será que não dá para declarar ponteiro de R aqui? -> Ou função de inicialização?
-	
-	#Pega inteiros na memória
-	ld t1, a1 		#a1 = A[i]
-	ld t2, a2		#a2 = B[i]
-	
-	#Soma rótulos
-	add t3, t1, t2		#t3 = A[i] + B[i]
-	
-	#QUESTION: verificar se está certo a ordem
-	st a3, t3		#R[i] = t3
+	#r1 = A[i]
+    #Calcula endereço do próximo inteiro
+	sub r0, r0		#r0 = 0
+	add r0, r3		#r0 = i
+	addi A			#r0 = i + A
+
+	ld r1, r0		#r1 = A[i] (Importante: A[i] sobrescreve o que tem em r1)
+
+	#r2 = B[i]
+	sub r0, r0		#r0 = 0
+	add r0, r3		#r0 = i
+	addi B			#r0 = i + B
+
+	ld r2, r0		#r2 = B[i]
+
+	#QUESTION: Sobrou um registrador aqui! Ent será que dá para fazer de outro jeito?
+	add r1, r2		#r1 = A[i] + B[i]
+
+	#R[i] = r1 (A[i] + B[i])
+	sub r0, r0      
+    add r0, r3      #r0 = i
+    addi R          #r0 = i + &R[0]
+    #QUESTION: Tá certo a ordem de registradores?
+    st r1, r0       #M[r0] = R[r1] <-> R[i] = A[i] + B[i]
 	
 	#Incrementa iterador
-	#QUESTION: Função específica?
-	#QUESTION: Será que não dá para usar multiplicação?
-	#QUESTION: Soma 1 ou 4? -> Depende da quantidade de bytes de int
-	addi a4, a4, 4		#i += 4
-	
-	#QUESTION:Será que branch aqui? -> economiza 3 operações de soma
-	
-	#Percorre vetores
-	#QUESTION: Função específica?
-	add a1, a1, a0		#a1 = a1 + i
-	add a2, a2, a0		#a2 = a2 + i
-	add a3, a3, a0		#a3 = a3 + i
+	#QUESTION: Função específica? Dá?
+
+    #i = i + 4
+    sub r0, r0          #r0 = 0
+    add r0, r3          #r0 = i
+    addi 4      #Ou 1?  #r0 = i + 4
+    sub r3, r3          #r3 = 0
+    add r3, r0          #r3 = r0 (i + 4)
 	
 	#QUESTION: Assim que usa ji?? 
 	ji soma_vetor		#goto soma_vetor -> TODO: Verificar comentário

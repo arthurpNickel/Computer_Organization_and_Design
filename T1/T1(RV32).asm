@@ -1,17 +1,15 @@
-#TRUQUES DA ARQUITETURA
-	#Zerar registrador: Sub r1, r1
-		#Prepara para atribuições
-
 #O aluno deverá escrever, em Assembly de REDUX-V, um programa que some dois vetores de 10 posições
 #fazendo R=A+B. O código deve inicializar os vetores A, B e R. Os vetores devem iniciar logo após as
 #instruções na memória (note que REDUX-V é uma arquitetura Von Neumann). Você deve implementar a
 #soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 #deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
-#TODO: Arrumar todos os comentários para ;
+#TODO: Arrumar todos os cometários para ;
 #TODO: Arrumar todos os addis -> só r[0] recebe
 #TODO: Arrumar todos os adds -> R[ra] <- R[ra] + R[ra]
 #TODO: SÓ TEM 4 REGISTRADORES -> fazer adaptações necessárias (r0, r1, r2, r3)
+
+#QUESTION: Só tem 4 reguistradores??
 
 #QUESTION: word mesmo?
 #QUESTION: Dá para fazer isso no EGG?
@@ -27,30 +25,21 @@ main:
 	#QUESTION: inicializar vetores?
 	
 	#Inicia iterador
-	#QUESTION: Função específica? Dentro de função inicializadora?
-	sub r3, r3		#r3 (i) = 0
+	#QUESTION: Função específica?
+	addi a4, zero , 0
 	
-	#QUESTION: acho que não dá para manter esse registrador
-	#QUESTION:Ou recebe 10? -> Qual tamanho do int em bytes?
+	#QUESTION:Ou recebe 10? -> depende se vai ter multiplicação
+	#QUESTION:Quantos bytes tem 1 inteiro?
 	addi a0, zero, 40	#a0(tam) = 10(tam do vetor) * 4(tam dos números, em bytes)
 	
 	#Atribui a ponteiros o endereço dos vetores
-
-	#r2 = &A[0]
-	sub r0, r0		#r0 = 0
-	sub r2, r2		#r2 = 0
-	addi A			#r0 = A
-	add r2, r0		#r2 = r0 (A)
-
-	#r1 = &B[0]
-	sub r0, r0
-	sub r1, r1
-	addi A
-	add r1, r0
-
-
+	#QUESTION: Usar addi mesmo?
+	addi a1, A		#a0 = &A[0]
+	addi a2, B		#a1 = &B[0]
+	addi a3, R		#a3 = &R[0]
+	
 	#Chama função de soma_vetor
-	#QUESTION: Soma mesmo ou só desvia?
+	#QUESTION: Soam mesmo ou só desvia?
 	#QUESTION: soma_vetor ou soma e imprime?
 	ji soma_vetor
 	
@@ -62,21 +51,14 @@ soma_vetor:
 	#QUESTION: É assim que usa brzr?
 	#QUESTION: Aqui é a posição certa do branch -> pode ser entre incrementa iterador e percorre vetores
 		#Aqui impede soma de vetores vazios -> mas nunca vai ter
-	
-	#ìf (i == tam) "return" !!!!!!!!!!
-
-	sub r0, r0
-	addi 40		#QUESTION: 40 ou 10? Vai ter que ser esse número constante mesmo?
-
-	sub r0, r3			#r0 = 40 - i
-
-	brzr r0, imprime
+	sub t0, a0, a4		#t0 = tam - i
+	brzr t0, fim		# if (i == tam) return
 
 	#QUESTION: Será que não dá para declarar ponteiro de R aqui? -> Ou função de inicialização?
 	
 	#Pega inteiros na memória
 	ld t1, a1 		#a1 = A[i]
-	ld t2, a2		#a2 = B[i]
+	ld t2, a2		#a2 = B[i] 
 	
 	#Soma rótulos
 	add t3, t1, t2		#t3 = A[i] + B[i]
@@ -101,10 +83,6 @@ soma_vetor:
 	#QUESTION: Assim que usa ji?? 
 	ji soma_vetor		#goto soma_vetor -> TODO: Verificar comentário
 
-imprime:
-	#TODO: Ver se dá para imprimir no REDUX
-
 fim:
-	#QUESTION: return??? -> PArece que não dá
-	ebreak
+	#QUESTION: return???
 	
