@@ -6,14 +6,6 @@
 
 ; TODO: Ver se dá para imprimir com REDUX
 ; TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
-; TODO: Arrumar todos os comentários para ;
-
-; QUESTION: word mesmo?
-; QUESTION: Dá para fazer isso no EGG?
-; QUESTION: .8 mesmo?
-A: .bits16 0, 2, 4, 6, 8, 10, 12, 14, 16, 18 ; vetor A
-B: .bits16 1 3 5 7 9 11 13 15 17 19 ; vetor B
-R: .bits16 0 0 0 0 0 0 0 0 0 0 ; vetor R zerado -> QUESTION: será que usar space dá certo?
 
 ; Q: .text?
 
@@ -47,7 +39,7 @@ soma_vetor:
     sub r1, r1          
     add r1, r0          ; r1 = r0 (tam - i)
 
-    addi fim          ; r0 = & de label "fim"
+    addi fim            ; r0 = & de label "fim"
 
 	brzr r1, r0
 	; -----------------------------------
@@ -56,14 +48,18 @@ soma_vetor:
     ; Calcula endereço do próximo inteiro
 	sub r0, r0		; r0 = 0
 	add r0, r3		; r0 = i
-	addi A			; r0 = i + A
+    addi 15
+	addi 15			; r0 = i + A
+    addi 5
 
 	ld r1, r0		; r1 = A[i] (Importante: A[i] sobrescreve o que tem em r1)
 
 	; r2 = B[i]
 	sub r0, r0		; r0 = 0
 	add r0, r3		; r0 = i
-	addi B			; r0 = i + B
+	addi 15			; r0 = i + B
+    addi 15
+    addi 15
 
 	ld r2, r0		; r2 = B[i]
 
@@ -73,7 +69,11 @@ soma_vetor:
 	; R[i] = r1 (A[i] + B[i])
 	sub r0, r0      
     add r0, r3      ; r0 = i
-    addi R          ; r0 = i + &R[0]
+    addi 15          ; r0 = i + &R[0]
+    addi 15
+    addi 15
+    addi 10
+
     ; QUESTION: Tá certo a ordem de registradores?
     st r1, r0       ; M[r0] = R[r1] <-> R[i] = A[i] + B[i]
 	
@@ -96,4 +96,10 @@ soma_vetor:
 fim:
 	; QUESTION: return??? -> PArece que não dá
 	ebreak
-	
+
+; QUESTION: word mesmo?
+; QUESTION: Dá para fazer isso no EGG?
+; QUESTION: .8 mesmo?
+.bits8 0x00 0x02 0x04 0x06 0x08 0x0A 0x0C 0x0E 0x10 0x12 ; vetor A
+.bits8 0x01 0x03 0x05 0x07 0x09 0x0B 0x0D 0x0F 0x11 0x13 ; vetor B
+.bits8 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 ; vetor R-> QUESTION: será que usar space dá certo?
