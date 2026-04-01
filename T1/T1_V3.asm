@@ -6,6 +6,8 @@
 
 ; TODO: Ver se dá para imprimir com REDUX
 ; TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
+; QUESTION: Será que dá para fixar um registrador com o endereço de A -> fazer calculo de endereços sempre com base nele
+; TODO: Verificar se dá para colocar labels nos vetores
 
 ; Q: .text?
 
@@ -25,6 +27,11 @@ main:
 	; TO DO: imprime R -> QUESTION: função para isso? -> Dá para ser aqui? Ou função chamada por soma_vetor?
 		; inicia iterador?
 		; percorre vetor até .. imprimindo?
+
+; QUESTION: Isso é gambiarra?
+fim:
+	; QUESTION: return??? -> PArece que não dá
+	ebreak
 	
 soma_vetor:
 	; QUESTION: É assim que usa brzr?
@@ -34,68 +41,73 @@ soma_vetor:
 	; ìf (i == tam) desvie para "imprime"
     ; r1(aux) = tam - i
 	sub r0, r0
-	addi 10		; QUESTION: 40 ou 10? Vai ter que ser esse número constante mesmo?
+	addi 7		; QUESTION: 40 ou 10? Vai ter que ser esse número constante mesmo?
+	addi 3
 	sub r0, r3			; r0 = tam - i
     sub r1, r1          
     add r1, r0          ; r1 = r0 (tam - i)
 
-    addi fim            ; r0 = & de label "fim"
+	sub r0, r0
+    addi fim            ; r0 = & de label "fim" ; ACHO QUE ISSO TA DANOD ERRADO -> colocou "0xfe"
 
-	brzr r1, r0
+	brzr r1, r0			; se r1 == 0; branch para R[r0]
 	; -----------------------------------
 
 	; r1 = A[i]
     ; Calcula endereço do próximo inteiro
-	sub r0, r0		; r0 = 0
-	add r0, r3		; r0 = i
-    addi 15
-	addi 15			; r0 = i + A
-    addi 5
 
-	ld r1, r0		; r1 = A[i] (Importante: A[i] sobrescreve o que tem em r1)
+	; r0 = i
+	sub r0, r0
+	add r0, r3
+
+	; AJUSTE DE ENDEREÇO!!!!!!!!!!!!!!!!!!!!
+	; r0 = i + A
+    addi 7
+	addi 7
+    addi 7
+	addi 7
+	addi 3
+
+	; r1 = A[i]
+	ld r1, r0		; (Importante: A[i] sobrescreve o que tem em r1)
+
+	; ----------------------------------
 
 	; r2 = B[i]
-	sub r0, r0		; r0 = 0
-	add r0, r3		; r0 = i
-	addi 15			; r0 = i + B
-    addi 15
-    addi 15
+	; endereço de B[i] em r0: r0 = (A + i) + 10 + número de instruções adicionadas = B + i
+	
+	; r0 = r0(A+i) + 10 + n
+	addi 7			
+	addi 3 ; + n (se add mais um tirando essa)
 
-	ld r2, r0		; r2 = B[i]
+	; r2 = B[i]
+	ld r2, r0
 
-	; QUESTION: Sobrou um registrador aqui! Ent será que dá para fazer de outro jeito?
-	add r1, r2		; r1 = A[i] + B[i]
+	; ---------------------------------
+
+	; r1 = A[i] + B[i]
+	add r1, r2
+
 
 	; R[i] = r1 (A[i] + B[i])
-	sub r0, r0      
-    add r0, r3      ; r0 = i
-    addi 15          ; r0 = i + &R[0]
-    addi 15
-    addi 15
-    addi 10
+
+	; r0 = i + R = (B + i) + 10 + número de instruções adicionadas
+	; r0 = B + i
+    addi 7
+	addi 3 ; + n (se add mais uma tirando essa)
 
     ; QUESTION: Tá certo a ordem de registradores?
     st r1, r0       ; M[r0] = R[r1] <-> R[i] = A[i] + B[i]
 	
 	; Incrementa iterador
 	; QUESTION: Função específica? Dá?
-
-    ; i = i + 1
-    sub r0, r0          ; r0 = 0
-    add r0, r3          ; r0 = i
-    addi 1      ; Ou 4?  r0 = i + 1
-    sub r3, r3          ; r3 = 0
-    add r3, r0          ; r3 = r0 (i + 1)
+	; i = i + 1
+	sub r0, r0
+	addi 1
+	add r3, r0
 	
 	; QUESTION: Assim que usa ji?? 
 	ji soma_vetor		; goto soma_vetor -> TODO: Verificar comentário
-
-; imprime:
-	; TODO: Ver se dá para imprimir no REDUX
-
-fim:
-	; QUESTION: return??? -> PArece que não dá
-	ebreak
 
 ; QUESTION: word mesmo?
 ; QUESTION: Dá para fazer isso no EGG?
