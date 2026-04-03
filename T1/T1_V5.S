@@ -4,11 +4,14 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
+; TODO: Analisar fluxo de memória no soma_vetor
+; TODO: Fazer alterações no indice
+    ; TODO: Guardar ele quando for incrementar
+
 ; TODO: Ver se dá para imprimir com REDUX
 ; TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
 ; TODO: Verificar se dá para colocar labels nos vetores
 ; TODO: Trocar comentários de posição do vetor A
-; TODO: Deixar parte do branch mais bonita mudando ordem de atribuição em r1
 
 ; QUESTION: Será que dá para fixar um registrador com o endereço de A -> fazer calculo de endereços sempre com base nele
 ; QUESTION: Colocar fim no meio é gambiarra?
@@ -18,13 +21,26 @@
 ; QUESTION:	Usar tam constante? (10)
 ; QUESTION: .bits8 mesmo?
 ; QUESTION: será que usar .space no vetor R dá certo? -> acho melhor garantir zerado
+; QUESTION: Será que precisa inicializar o i??
+    ; Já sei que ele começa em 0 né
+
+.bits8 0x00 ; Guardar índice i em memória
 
 main:	
-	; Inicia iterador
-	sub r3, r3		; r3 (i) = 0
+	; Q: Inicia iterador
+	; Q: sub r3, r3		; r3 (i) = 0
+
+    ; AJUSTE DE ENDEREÇO!!!!!!!!!!!!!!!!!!!!
+    ; Guardar endereço do vetor A em r0 (base para achar os outros)
+	; r0 = i + A (pos 34)
+    addi 7
+	addi 7
+    addi 7
+	addi 7
+	addi 6
 	
 	; Desvia para soma_vetor
-	ji soma_vetor	; ESSE JI TA MUITO ESTRANHO!!!!!!!!!!!!!!!
+	ji soma_vetor	; ESSE JI TA MUITO ESTRANHO!!!!!!!!!!!!!!! -> MAIS AINDA AGORA
 
 fim:
 	ebreak
@@ -32,16 +48,20 @@ fim:
 soma_vetor:	
 	; if (i == tam) desvie para 'fim'
 
+    ; Pega i da memória
+    sub r0, r0          ; r0 = &i
+
+    ld r2, r0           ; r2 = i
+
     ; r1(aux) = tam - i
-	sub r0, r0
 	addi 7
-	addi 3				; r0 = tam
-	sub r0, r3			; r0 = tam - i
-    sub r1, r1          
-    add r1, r0          ; r1 = r0 (tam - i)
+	addi 3				; r0 = tam (considera que endereço de i sempre é 0)
+    sub r1, r1
+    add r1, r0          ; r1 = tam
+    sub r1, r2          ; r1 = tam - i
 
 	sub r0, r0
-    addi fim            ; r0 = &ebreak
+    addi fim            ; r0 = &ebreak -> Q: NÃO SEI AINDA SE VAI DAR CERTO!!!!!!
 
 	brzr r1, r0			; se r1 == 0, desvie para 'fim'
 	; -----------------------------------
