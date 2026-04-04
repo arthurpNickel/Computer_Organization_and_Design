@@ -27,17 +27,19 @@
 .bits8 0x00 ; Guardar índice i em memória
 
 main:	
-	; Q: Inicia iterador
-	; Q: sub r3, r3		; r3 (i) = 0
+	; Q: Inicia iterador -> estranho, pois primeiramente ignora o indice em memória
+	; Q: sub r2, r2		; r2 (i) = 0
 
     ; AJUSTE DE ENDEREÇO!!!!!!!!!!!!!!!!!!!!
-    ; Guardar endereço do vetor A em r0 (base para achar os outros)
-	; r0 = i + A (pos 34)
+    ; Guardar endereço do vetor A em r3 (base para achar os outros)
+	; r3 = A (pos 34)
     addi 7
 	addi 7
     addi 7
 	addi 7
 	addi 6
+
+	; Q: Somar iterador aqui já?
 	
 	; Desvia para soma_vetor
 	ji soma_vetor	; ESSE JI TA MUITO ESTRANHO!!!!!!!!!!!!!!! -> MAIS AINDA AGORA
@@ -48,7 +50,7 @@ fim:
 soma_vetor:	
 	; if (i == tam) desvie para 'fim'
 
-    ; Pega i da memória
+    ; Pega i da memória -> TIRAR ISSO AQUI -> JÁ VAI ESTAR EM R2
     sub r0, r0          ; r0 = &i
 
     ld r2, r0           ; r2 = i
@@ -70,17 +72,7 @@ soma_vetor:
 	; Calcula &A[i] (endereço base para vetores) e pega A[i]
 
 	; !!!!!!!!!!!!!!!!!
-	; r0 = i
-	sub r0, r0
-	add r0, r3
-
-	; AJUSTE DE ENDEREÇO!!!!!!!!!!!!!!!!!!!!
-	; r0 = i + A (pos 35)
-    addi 7
-	addi 7
-    addi 7
-	addi 7
-	addi 6
+	; Neste ponto, eu tenho i em r2 e A em r3
 
 	; r1 = A[i] - Armazena em r1
 	ld r1, r0		; (Importante: A[i] sobrescreve o que tem em r1)
