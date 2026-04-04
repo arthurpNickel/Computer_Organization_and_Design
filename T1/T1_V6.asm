@@ -27,7 +27,7 @@
 .bits8 0x00 ; Guardar índice i em memória
 
 main:	
-	; Q: Inicia iterador -> estranho, pois primeiramente ignora o indice em memória
+	; Q: Inicia iterador -> estranho, pois primeiramente ignora o indice em memória -> cpa fazer mais um ld
 	; Q: sub r2, r2		; r2 (i) = 0
 
     ; AJUSTE DE ENDEREÇO!!!!!!!!!!!!!!!!!!!!
