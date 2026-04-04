@@ -4,9 +4,7 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
-; TODO: Analisar fluxo de memória no soma_vetor
-; TODO: Fazer alterações no indice
-    ; TODO: Guardar ele quando for incrementar
+; TODO: DESCOBRIR PQ O B[10] ESTÁ COM 3 A MAIS???
 
 ; TODO: Ver se dá para imprimir com REDUX
 ; TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
@@ -31,7 +29,7 @@ ji main
 main:	
     ; AJUSTE DE ENDEREÇO!!!!!!!!!!!!!!!!!!!!
     ; Guardar endereço do vetor A em r3 (base para achar os outros)
-	; r3 = A (pos 41)
+	; r3 = A (pos 47)
 	sub r0, r0
     addi 7
 	addi 7
@@ -39,7 +37,7 @@ main:
 	addi 7
 	addi 7
 	addi 7
-	addi 1 ; !!!!!!!!!!!!!!
+	addi 5 ; !!!!!!!!!!!!!!
 	sub r3, r3
 	add r3, r0
 
@@ -55,6 +53,7 @@ soma_vetor:
 
     ; Pega i da memória
     sub r0, r0          ; r0 = &i
+	addi 1
     ld r2, r0           ; r2 = i
 
     ; r1(aux) = tam - i
@@ -64,8 +63,10 @@ soma_vetor:
     add r1, r0          ; r1 = tam
     sub r1, r2          ; r1 = tam - i
 
+	; r0 = &fim (pos 13)
 	sub r0, r0
-    addi 1 ; !!!!!!!!!!!!
+    addi 7 ; !!!!!!!!!!!!
+	addi 6 
 
 	brzr r1, r0			; se r1 == 0, desvie para 'fim'
 	; -----------------------------------
@@ -110,23 +111,25 @@ soma_vetor:
 	; Incrementa iterador - i++
 
 	; r2 = i
-	sub r1, r1		; r1 = &i
+	sub r0, r0		; r1 = &i
+	addi 1;
 	sub r2, r2
-	ld r2, r1
+	ld r2, r0
 
 	; i++
-	sub r0, r0
-	addi 1
-	add r2, r0
+	add r2, r0		; r0 já é 1 (bateu com o endereço de i)
 
 	; Guarda i incrementado
-	st r2, r1
+	st r2, r0
 
 	;------------------------------------	
 	; Desvia para soma_vetor usando brzr
 
+	; r0 = &soma_vetor (pos 14)
+	; !!!!!!!!!!!!!!!!!!!!!!!!!
 	sub r0, r0
-	addi soma_vetor	; QUESTION: NÃO SEI SE AINDA FUNCIONA!!!
+	addi 7
+	addi 7
 
 	sub r1, r1		; Força desvio
 	brzr r1, r0	
@@ -134,11 +137,11 @@ soma_vetor:
 ;----------------------------------------
 ;Vetores:
 
-; Vetor A (pos 34):
+; Vetor A (pos 47):
 .bits8 0x00 0x02 0x04 0x06 0x08 0x0A 0x0C 0x0E 0x10 0x12
 
-; Vetor B (pos 44):
+; Vetor B
 .bits8 0x01 0x03 0x05 0x07 0x09 0x0B 0x0D 0x0F 0x11 0x13
 
-; Vetor R (pos 54):
+; Vetor R
 .bits8 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
