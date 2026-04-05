@@ -5,57 +5,39 @@
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
 ; TODO: Analisar fluxo de memória no soma_vetor
-; TODO: Fazer alterações no indice
-    ; TODO: Guardar ele quando for incrementar
 
-; TODO: Ver se dá para imprimir com REDUX
-; TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
-; TODO: Verificar se dá para colocar labels nos vetores
-; TODO: Trocar comentários de posição do vetor A
-
-; QUESTION: Será que dá para fixar um registrador com o endereço de A -> fazer calculo de endereços sempre com base nele
-; QUESTION: Colocar fim no meio é gambiarra?
-; QUESTION: Fazer função inicializadora antes de soma_vetor?
-	; E colocar sub r3, r3
-; QUESTION: Função de inicia iterador? Função de percorre? Dá?
-; QUESTION:	Usar tam constante? (10)
-; QUESTION: .bits8 mesmo?
-; QUESTION: será que usar .space no vetor R dá certo? -> acho melhor garantir zerado
-; QUESTION: Será que precisa inicializar o i??
-    ; Já sei que ele começa em 0 né
+ji main
 
 .bits8 0x00 ; Guardar índice i em memória
 
-main:	
-	; Q: Inicia iterador -> estranho, pois primeiramente ignora o indice em memória -> cpa fazer mais um ld
-	; Q: sub r2, r2		; r2 (i) = 0
+fim: ebreak
 
-    ; AJUSTE DE ENDEREÇO!!!!!!!!!!!!!!!!!!!!
+main:	
+	; Inicia iterador -> Q: Esquisitasso isso aqui -> ignoro i em memória
+	sub r2, r2		; r2 (i) = 0
+
     ; Guardar endereço do vetor A em r3 (base para achar os outros)
-	; r3 = A (pos 34)
+	; r3 = A (pos 45)
+	sub r0, r0
     addi 7
 	addi 7
     addi 7
 	addi 7
-	addi 6
+	addi 7
+	addi 7
+	addi 3; !!!!!!!!!!!!!!
+	sub r3, r3
+	add r3, r0
 
 	; Q: Somar iterador aqui já?
 	
-	; Desvia para soma_vetor
-	ji soma_vetor	; ESSE JI TA MUITO ESTRANHO!!!!!!!!!!!!!!! -> MAIS AINDA AGORA
-
-fim:
-	ebreak
-	
-soma_vetor:	
+soma_vetor:
 	; if (i == tam) desvie para 'fim'
 
-    ; Pega i da memória -> TIRAR ISSO AQUI -> JÁ VAI ESTAR EM R2
-    sub r0, r0          ; r0 = &i
-
-    ld r2, r0           ; r2 = i
+	; Para entrar aqui é garantido que i está em r2
 
     ; r1(aux) = tam - i
+	sub r0, r0
 	addi 7
 	addi 3				; r0 = tam (considera que endereço de i sempre é 0)
     sub r1, r1
@@ -63,18 +45,22 @@ soma_vetor:
     sub r1, r2          ; r1 = tam - i
 
 	sub r0, r0
-    addi fim            ; r0 = &ebreak -> Q: NÃO SEI AINDA SE VAI DAR CERTO!!!!!!
+    addi fim            ; r0 = &ebreak
 
 	brzr r1, r0			; se r1 == 0, desvie para 'fim'
 	; -----------------------------------
 	; Soma de rótulos e armazenamento
 	; -----------------------------------
-	; Calcula &A[i] (endereço base para vetores) e pega A[i]
+	; Calcula &A[i] e pega A[i]
 
-	; !!!!!!!!!!!!!!!!!
 	; Neste ponto, eu tenho i em r2 e A em r3
 
-	; r1 = A[i] - Armazena em r1
+	; r0 = &A[i]
+	sub r0, r0
+	add r0, r2
+	add r0, r3
+
+	; r1 = A[i]
 	ld r1, r0		; (Importante: A[i] sobrescreve o que tem em r1)
 
 	; ----------------------------------
@@ -103,15 +89,26 @@ soma_vetor:
 	;------------------------------------
 	; Incrementa iterador - i++
 
-	sub r0, r0
-	addi 1
-	add r3, r0
+	; r2 = i
+	sub r0, r0		; r1 = &i
+	addi 1;
+	sub r2, r2
+	ld r2, r0
+
+	; i++
+	add r2, r0		; r0 já é 1 (bateu com o endereço de i)
+
+	; Guarda i incrementado
+	st r2, r0
 
 	;------------------------------------	
 	; Desvia para soma_vetor usando brzr
 
+	; r0 = &soma_vetor (pos 14)
+	; !!!!!!!!!!!!!!!!!!!!!!!!!
 	sub r0, r0
-	addi soma_vetor
+	addi 7
+	addi 7
 
 	sub r1, r1		; Força desvio
 	brzr r1, r0	
@@ -119,11 +116,11 @@ soma_vetor:
 ;----------------------------------------
 ;Vetores:
 
-; Vetor A (pos 34):
+; Vetor A (pos 45):
 .bits8 0x00 0x02 0x04 0x06 0x08 0x0A 0x0C 0x0E 0x10 0x12
 
-; Vetor B (pos 44):
+; Vetor B
 .bits8 0x01 0x03 0x05 0x07 0x09 0x0B 0x0D 0x0F 0x11 0x13
 
-; Vetor R (pos 54):
+; Vetor R
 .bits8 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00

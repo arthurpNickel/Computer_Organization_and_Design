@@ -4,21 +4,6 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
-; TODO: Ver se dá para imprimir com REDUX
-; TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
-; TODO: Verificar se dá para colocar labels nos vetores
-; TODO: Trocar comentários de posição do vetor A
-; TODO: Deixar parte do branch mais bonita mudando ordem de atribuição em r1
-
-; QUESTION: Será que dá para fixar um registrador com o endereço de A -> fazer calculo de endereços sempre com base nele
-; QUESTION: Colocar fim no meio é gambiarra?
-; QUESTION: Fazer função inicializadora antes de soma_vetor?
-	; E colocar sub r3, r3
-; QUESTION: Função de inicia iterador? Função de percorre? Dá?
-; QUESTION:	Usar tam constante? (10)
-; QUESTION: .bits8 mesmo?
-; QUESTION: será que usar .space no vetor R dá certo? -> acho melhor garantir zerado
-
 main:	
 	; Inicia iterador
 	sub r3, r3		; r3 (i) = 0
@@ -35,9 +20,9 @@ soma_vetor:
 	sub r0, r0
 	addi 7
 	addi 3				; r0 = tam
-	sub r0, r3			; r0 = tam - i
-    sub r1, r1          
-    add r1, r0          ; r1 = r0 (tam - i)
+	sub r1, r1	
+	add r1, r0			; r1 = tam
+	sub r1, r3			; r1 = r1(tam) - i
 
 	sub r0, r0
     addi fim            ; r0 = &ebreak
@@ -48,13 +33,11 @@ soma_vetor:
 	; -----------------------------------
 	; Calcula &A[i] (endereço base para vetores) e pega A[i]
 
-	; !!!!!!!!!!!!!!!!!
 	; r0 = i
 	sub r0, r0
 	add r0, r3
 
-	; AJUSTE DE ENDEREÇO!!!!!!!!!!!!!!!!!!!!
-	; r0 = i + A (pos 35)
+	; r0 = i + A (pos 3)
     addi 7
 	addi 7
     addi 7

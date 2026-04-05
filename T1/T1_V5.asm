@@ -4,32 +4,19 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
-; TODO: DESCOBRIR PQ O B[10] ESTÁ COM 3 A MAIS???
-
-; TODO: Ver se dá para imprimir com REDUX
-; TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
-; TODO: Verificar se dá para colocar labels nos vetores
-; TODO: Trocar comentários de posição do vetor A
-
-; QUESTION: Será que dá para fixar um registrador com o endereço de A -> fazer calculo de endereços sempre com base nele
-; QUESTION: Colocar fim no meio é gambiarra?
-; QUESTION: Fazer função inicializadora antes de soma_vetor?
-	; E colocar sub r3, r3
-; QUESTION: Função de inicia iterador? Função de percorre? Dá?
-; QUESTION:	Usar tam constante? (10)
-; QUESTION: .bits8 mesmo?
-; QUESTION: será que usar .space no vetor R dá certo? -> acho melhor garantir zerado
-; QUESTION: Será que precisa inicializar o i??
-    ; Já sei que ele começa em 0 né
+;TODO: Colocar fim antes de main e fazer ajustes necessários
+	; Não precisa mais do ji main
 
 ji main
 
 .bits8 0x00 ; Guardar índice i em memória
 
+fim: ebreak
+
 main:	
     ; AJUSTE DE ENDEREÇO!!!!!!!!!!!!!!!!!!!!
     ; Guardar endereço do vetor A em r3 (base para achar os outros)
-	; r3 = A (pos 47)
+	; r3 = A (pos 45)
 	sub r0, r0
     addi 7
 	addi 7
@@ -37,16 +24,11 @@ main:
 	addi 7
 	addi 7
 	addi 7
-	addi 5 ; !!!!!!!!!!!!!!
+	addi 4; !!!!!!!!!!!!!!
 	sub r3, r3
 	add r3, r0
 
 	; Q: Somar iterador aqui já? -> Outra versão
-	
-	; Desvia para soma_vetor
-	ji soma_vetor
-
-fim: ebreak
 	
 soma_vetor:	
 	; if (i == tam) desvie para 'fim'
@@ -58,15 +40,14 @@ soma_vetor:
 
     ; r1(aux) = tam - i
 	addi 7
-	addi 3				; r0 = tam (considera que endereço de i sempre é 0)
+	addi 2				; r0 = tam (considera que endereço de i sempre é 0)
     sub r1, r1
     add r1, r0          ; r1 = tam
     sub r1, r2          ; r1 = tam - i
 
-	; r0 = &fim (pos 13)
+	; r0 = &fim
 	sub r0, r0
-    addi 7 ; !!!!!!!!!!!!
-	addi 6 
+    addi fim 
 
 	brzr r1, r0			; se r1 == 0, desvie para 'fim'
 	; -----------------------------------
@@ -129,7 +110,7 @@ soma_vetor:
 	; !!!!!!!!!!!!!!!!!!!!!!!!!
 	sub r0, r0
 	addi 7
-	addi 7
+	addi 6
 
 	sub r1, r1		; Força desvio
 	brzr r1, r0	
@@ -137,7 +118,7 @@ soma_vetor:
 ;----------------------------------------
 ;Vetores:
 
-; Vetor A (pos 47):
+; Vetor A (pos 45):
 .bits8 0x00 0x02 0x04 0x06 0x08 0x0A 0x0C 0x0E 0x10 0x12
 
 ; Vetor B
