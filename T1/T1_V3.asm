@@ -4,6 +4,8 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
+; VERSÃO DEFINITIVA (com cálculo de endereço no loop)
+
 main:	
 	; Inicia iterador
 	sub r3, r3		; r3 (i) = 0
@@ -37,7 +39,7 @@ soma_vetor:
 	sub r0, r0
 	add r0, r3
 
-	; r0 = i + A (pos 3)
+	; r0 = i + A (pos 34)
     addi 7
 	addi 7
     addi 7

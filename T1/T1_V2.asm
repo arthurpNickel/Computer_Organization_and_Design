@@ -4,6 +4,8 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
+; VERSÃO DE TESTES
+
 ; TODO: Ver se dá para imprimir com REDUX
 ; TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
 ; TODO: Arrumar todos os comentários para ;

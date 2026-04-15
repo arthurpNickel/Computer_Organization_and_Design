@@ -4,7 +4,8 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
-; Versão guardando indice na memória
+; Versão guardando indice na memória calculando o endereço com shift
+	; Diminui 2 instruções
 
 ji main
 
@@ -14,15 +15,19 @@ fim: ebreak
 
 main:	
     ; Guardar endereço do vetor A em r3 (base para achar os outros)
-	; r3 = A (pos 46)
+	; r3 = A (pos 44)
+
+	; Colocar tam do shift em r1
 	sub r0, r0
-    addi 7
-	addi 7
-    addi 7
-	addi 7
-	addi 7
-	addi 7
-	addi 4
+	sub r1, r1
+	addi 3
+	add r1, r0
+
+	; "Cria" endereço em r0
+	addi 2
+	slr r0, r1
+	addi 5
+
 	sub r3, r3
 	add r3, r0
 
@@ -38,7 +43,7 @@ soma_vetor:
 
     ; r1(aux) = tam - i
 	addi 7
-	addi 2				; r0 = tam (considera que endereço de i sempre é 1) - gambiarra
+	addi 2				; r0 = tam (considera que endereço de i sempre é 0)
     sub r1, r1
     add r1, r0          ; r1 = tam
     sub r1, r2          ; r1 = tam - i
@@ -104,10 +109,10 @@ soma_vetor:
 	;------------------------------------	
 	; Desvia para soma_vetor usando brzr
 
-	; r0 = &soma_vetor (pos 14)
+	; r0 = &soma_vetor (pos 12)
 	sub r0, r0
 	addi 7
-	addi 6
+	addi 5
 
 	sub r1, r1		; Força desvio
 	brzr r1, r0	
@@ -115,7 +120,7 @@ soma_vetor:
 ;----------------------------------------
 ;Vetores:
 
-; Vetor A (pos 46):
+; Vetor A (pos 44):
 .bits8 0x00 0x02 0x04 0x06 0x08 0x0A 0x0C 0x0E 0x10 0x12
 
 ; Vetor B

@@ -8,12 +8,13 @@
 #soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 #deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
+#VERSÃO DE TESTES
+
 #TODO: Arrumar todos os comentários para ;
 #TODO: Arrumar todos os addis -> só r[0] recebe
 #TODO: Arrumar todos os adds -> R[ra] <- R[ra] + R[ra]
 #TODO: SÓ TEM 4 REGISTRADORES -> fazer adaptações necessárias (r0, r1, r2, r3)
 
-#QUESTION: word mesmo?
 #QUESTION: Dá para fazer isso no EGG?
 #QUESTION: .32 mesmo?
 A: .bits32 0 2 4 6 8 10 12 14 16 18 #vetor A

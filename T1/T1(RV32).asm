@@ -4,6 +4,8 @@
 #soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 #deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
+#VERSÃO DE TESTES
+
 #TODO: Arrumar todos os cometários para ;
 #TODO: Arrumar todos os addis -> só r[0] recebe
 #TODO: Arrumar todos os adds -> R[ra] <- R[ra] + R[ra]

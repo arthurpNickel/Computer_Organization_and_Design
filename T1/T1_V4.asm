@@ -4,11 +4,11 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
+; Versão de testes
+
 ; TODO: Ver se dá para imprimir com REDUX
 ; TODO: Ver minha nova lógica tá dando boa e responder question, com o chat
 ; QUESTION: Será que dá para fixar um registrador com o endereço de A -> fazer calculo de endereços sempre com base nele
-
-; Q: .text?
 
 main:
     

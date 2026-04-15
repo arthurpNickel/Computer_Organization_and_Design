@@ -4,7 +4,8 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
-; TODO: Analisar fluxo de memória no soma_vetor
+; Versão entrando no loop com iterador na memória	
+	; Meio ruim, com bastante gambiarra
 
 ji main
 
@@ -13,7 +14,7 @@ ji main
 fim: ebreak
 
 main:	
-	; Inicia iterador -> Q: Esquisitasso isso aqui -> ignoro i em memória
+	; Inicia iterador -> Esquisitasso isso aqui -> ignoro i em memória !!!!!!!!!!!!!
 	sub r2, r2		; r2 (i) = 0
 
     ; Guardar endereço do vetor A em r3 (base para achar os outros)
@@ -25,7 +26,7 @@ main:
 	addi 7
 	addi 7
 	addi 7
-	addi 3; !!!!!!!!!!!!!!
+	addi 3
 	sub r3, r3
 	add r3, r0
 
@@ -105,7 +106,6 @@ soma_vetor:
 	; Desvia para soma_vetor usando brzr
 
 	; r0 = &soma_vetor (pos 14)
-	; !!!!!!!!!!!!!!!!!!!!!!!!!
 	sub r0, r0
 	addi 7
 	addi 7
