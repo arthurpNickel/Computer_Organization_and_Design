@@ -4,50 +4,43 @@
 ; soma com loop para percorrer o vetor. A lista de instruções é dada na próxima página. O Assembly
 ; deve ser escrito no formato legível pelo emulador EGG (https://github.com/gboncoffee/egg).
 
-; VERSÃO DEFINITIVA (com cálculo de endereço no loop)
+; VERSÃO DEFINITIVA (com cálculo de endereço no loop) com novas instruções
 
 main:	
 	; Inicia iterador
 	sub r3, r3		; r3 (i) = 0
 	
 	; Desvia para soma_vetor
-	ji soma_vetor
+	ji 2			; AQUI PODE DAR MERDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -> CLAUDE DISSE 1?????????????
 
-fim: ebreak
+fim: ji 0			; Programa entra em um looping infinito -> CLAUDE DISSE -1?????????????
 	
-soma_vetor:
+soma_vetor:	
 	;------------------------------------
 	; if (i == tam) desvie para 'fim'
 	; -----------------------------------
 
     ; r1(aux) = tam - i
-	sub r0, r0
-	addi 7
-	addi 3				; r0 = tam
+	li 7			; OBS: sobreescrição
+	addi 3			; r0 = tam
+
 	sub r1, r1	
-	add r1, r0			; r1 = tam
-	sub r1, r3			; r1 = r1(tam) - i
+	add r1, r0		; r1 = tam
+	sub r1, r3		; r1 = r1(tam) - i
 
-	sub r0, r0
-    addi fim            ; r0 = &ebreak
+	li 2            ; r0 = fim - AQUI PODE DAR MERDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	brzr r1, r0			; se r1 == 0, desvie para 'fim'
+	brzr r1, r0		; se r1 == 0, desvie para 'fim'
 
 	; -----------------------------------
 	; Soma de rótulos e armazenamento
 	; -----------------------------------
 	; Calcula &A[i] (endereço base para vetores) e pega A[i]
 
-	; r0 = i
-	sub r0, r0
-	add r0, r3
-
-	; r0 = i + A (pos 34)
-    addi 7
-	addi 7
-    addi 7
-	addi 7
-	addi 6
+	; r0 = i + A (pos 25)
+    lui 2			; r0 = 32
+	addi -7
+	add r0, r3 		; r0 += i
 
 	; r1 = A[i] - Armazena em r1
 	ld r1, r0		; (Importante: A[i] sobrescreve o que tem em r1)
@@ -78,27 +71,23 @@ soma_vetor:
 	;------------------------------------
 	; Incrementa iterador - i++
 
-	sub r0, r0
-	addi 1
+	li 1
 	add r3, r0
 
 	;------------------------------------	
-	; Desvia para soma_vetor usando brzr
+	; Desvia para soma_vetor
 
-	sub r0, r0
-	addi soma_vetor
-
-	sub r1, r1		; Força desvio
-	brzr r1, r0	
+	li 3			; r0 = soma_vetor - AQUI PODE DAR MERDA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	jar r0
 
 ;----------------------------------------
 ;Vetores:
 
-; Vetor A (pos 34):
+; Vetor A (pos 25): !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 .bits8 0x00 0x02 0x04 0x06 0x08 0x0A 0x0C 0x0E 0x10 0x12
 
-; Vetor B (pos 44):
+; Vetor B:
 .bits8 0x01 0x03 0x05 0x07 0x09 0x0B 0x0D 0x0F 0x11 0x13
 
-; Vetor R (pos 54):
+; Vetor R:
 .bits8 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00

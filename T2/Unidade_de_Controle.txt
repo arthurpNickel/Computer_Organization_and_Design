@@ -1,0 +1,34 @@
+# Tabela da verdade
+# Gerado a partir do circuito Unidade_de_Controle
+# Exportado em Mon Apr 20 17:48:02 BRT 2026
+
+# Dicas e Notas sobre Formatação:
+# Você pode editar este arquivo e depois importá-lo de volta para o Logisim!
+# Qualquer coisa depois de um «#» é um comentário e será ignorado.
+# *y * Linhas em branco e linhas separadoras (por exemplo, ~~~~~~~~~~) são ignoradas.
+# * Manter nomes de colunas simples (sem espaços, pontuação, etc.)
+# * “Name[N..0]” indica uma variável N 1 bit, enquanto que
+# “Nome” por si só indica uma variável de 1 bit.
+# Você pode usar «x» ou «-» para indicar «não se importa» para ambos
+# bits de entrada e saída #.
+# Você pode usar notação binária (por exemplo, “10100011xxxxxx”) ou
+# ou hexadecimal (por exemplo, «C3x»). Logisim vai descobrir qual é qual.
+
+opcode[3..0] | MUX_Type ALUOp[2..0] RegWrite MemWrite MUX_RegIn[1..0] MUX_ULA_B JAR Branch MUX_SumPC
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    0000     |    0         ---        0        0           --            -      0    1        0    
+    0001     |    1         ---        0        0           --            -      0    0        1    
+    0010     |    0         ---        1        0           01            -      0    0        0    
+    0011     |    0         ---        0        1           --            -      0    0        0    
+    0100     |    1         100        1        0           00            1      0    0        0    
+    0101     |    1         ---        1        0           10            -      0    0        0    
+    0110     |    1         ---        1        0           11            -      0    0        0    
+    0111     |    -         ---        0        0           --            -      1    0        0    
+    1000     |    0         000        1        0           00            0      0    0        0    
+    1001     |    0         001        1        0           00            0      0    0        0    
+    1010     |    0         010        1        0           00            0      0    0        0    
+    1011     |    0         011        1        0           00            0      0    0        0    
+    1100     |    0         100        1        0           00            0      0    0        0    
+    1101     |    0         101        1        0           00            0      0    0        0    
+    1110     |    0         110        1        0           00            0      0    0        0    
+    1111     |    0         111        1        0           00            0      0    0        0    
