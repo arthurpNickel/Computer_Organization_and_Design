@@ -1,0 +1,434 @@
+================================================================================
+                  ARQUITETURA DE COMPUTADORES - UFPR
+                         RELATORIO DO TRABALHO 2
+================================================================================
+
+
+DOCUMENTOS E ARQUIVOS
+--------------------------------------------------------------------------------
+
+Na pasta 'Implementacao' encontram-se dois modelos de processadores: um
+Monociclo e um com Pipeline, alem do programa 'soma_vetores_v1', que implementa
+o programa assembly em hexadecimal (evolucao da versao 1 do Trabalho 1), e
+tambem os arquivos contendo as tabelas-verdade utilizadas nos circuitos.
+
+Apenas o processador Monociclo esta funcionando corretamente com o programa.
+Infelizmente nao foi possivel concluir o debug do circuito com Pipeline. O
+circuito teve todas as conexoes e componentes internos implementados; contudo,
+acredito que ocorreu um problema na inicializacao do pipeline: como o PC depende
+de estagios anteriores que nao foram inicializados, ele assume valor indefinido,
+e a execucao nao funciona da forma esperada. Comecei a implementar um circuito
+de Reset para tentar resolver esse problema, mas nao restou tempo habil para
+entregar a versao corrigida. Pretendo continuar a correcao apos a entrega e
+enviar a versao atualizada por e-mail, caso o senhor aceite.
+
+Etou enviando um pdf com as minhas anotacoes do datapaht do monociclo.
+Os datapaths descritos abaixo referem-se ao circuito Monociclo. Os sinais de
+controle, no entanto, sao identicos nos dois modelos.
+
+
+================================================================================
+DATAPATH DO PROCESSADOR + SINAIS DE CONTROLE
+================================================================================
+
+--------------------------------------------------------------------------------
+0000 | R | brzr ra, rb  -- Branch On Zero Register
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID: ra -> MUX_Type -> r1 / rb -> r2
+  3. EX: R[ra] -> Circuito_de_Salto -> Seletor de MUX_PC
+         R[rb] -> MUX_PC -> PC_In
+
+Sinais de controle:
+  JAR        = 0 (Nao)
+  Branch     = 1 (Sim)
+  MUX_Type   = 0 (ra)
+  MUX_SumPC  = 0
+
+--------------------------------------------------------------------------------
+0001 | I | ji imm  -- Jump Immediate (signed)
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID: Imm -> MUX_SumPC
+  3. EX: Imm -> Somador
+         Somador: Imm + PC
+         Somador_Out -> MUX_PC -> PC_In
+
+Sinais de controle:
+  MUX_SumPC  = 1 (Soma com imediato)
+  MUX_PC     = 0 (Deslocamento relativo)
+
+--------------------------------------------------------------------------------
+0010 | R | ld ra, rb  -- Load
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID: ra -> MUX_Type -> rd / rb -> r2
+  3. MEM: R[rb] -> MemAdress
+          Mem[R[rb]] -> MemOut
+  4. WB:  MemOut -> MUX_RegIn -> RegIn
+
+Sinais de controle:
+  RegWrite   = 1
+  MUX_RegIn  = 01 (Conteudo de Memoria)
+  MUX_Type   = 0  (ra)
+
+--------------------------------------------------------------------------------
+0011 | R | st ra, rb  -- Store
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID: ra -> MUX_Type -> r1 / rb -> r2
+  3. MEM: R[ra] -> MemDataIn
+          R[rb] -> MemAdress
+
+Sinais de controle:
+  MemWrite   = 1
+  MUX_Type   = 0 (ra)
+
+--------------------------------------------------------------------------------
+0100 | I | addi imm  -- Add Immediate (signed)
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID: imm -> MUX_ULA_B -> ULA_B
+         0   -> MUX_Type  -> r1, rd
+  3. EX: ULA: r1 + imm
+  4. WB: ULA_OUT -> MUX_RegIn -> RegIn
+
+Sinais de controle:
+  ALUOp      = 100 (add)
+  RegWrite   = 1
+  MUX_ULA_B  = 1 (Imediato)
+  MUX_RegIn  = 00 (Resultado da ULA)
+  MUX_Type   = 1 (r0)
+
+--------------------------------------------------------------------------------
+0101 | I | li imm  -- Load Immediate
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID/WB: Imm -> MUX_RegIn -> RegIn
+            0   -> MUX_Type  -> rd
+
+Sinais de controle:
+  RegWrite   = 1
+  MUX_RegIn  = 10 (Imediato)
+  MUX_Type   = 1  (r0)
+
+--------------------------------------------------------------------------------
+0110 | I | lui imm  -- Load Upper Immediate
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID: 0   -> MUX_Type -> rd
+         Imm -> Shifter_In
+  3. EX: Shifter: Imm << 4
+  4. WB: Shifter_Out -> MUX_RegIn -> RegIn
+
+Sinais de controle:
+  MUX_RegIn  = 11 (Imediato extendido)
+  RegWrite   = 1
+  MUX_Type   = 1  (r0)
+
+--------------------------------------------------------------------------------
+0111 | R | jar rb  -- Jump for Address in Register
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID: rb -> r2
+  3. EX: R[rb] -> Controle branch -> MUX_PC -> PC_In
+
+Sinais de controle:
+  JAR        = 1 (Sim)
+
+--------------------------------------------------------------------------------
+1000 | R | not ra, rb  -- Not (logical)
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID: ra -> MUX_Type -> rd / rb -> r2
+  3. EX: R[rb] -> MUX_ULA_B -> ULA_B
+         ULA: not R[rb]
+  4. WB: ULA_OUT -> MUX_RegIn -> RegIn
+
+Sinais de controle:
+  ALUOp      = 000 (not)
+  RegWrite   = 1
+  MUX_ULA_B  = 0 (Registrador)
+  MUX_RegIn  = 00 (Resultado da ULA)
+  MUX_Type   = 0  (ra)
+
+--------------------------------------------------------------------------------
+1001 | R | and ra, rb  -- And (bitwise)
+--------------------------------------------------------------------------------
+Datapath:
+  1. IF
+  2. ID: ra -> MUX_Type -> r1, rd / rb -> r2
+  3. EX: R[ra] -> ULA_A
+         R[rb] -> MUX_ULA_B -> ULA_B
+         ULA: R[ra] and R[rb]
+  4. WB: ULA_OUT -> MUX_RegIn -> RegIn
+
+  OBS: O mesmo datapath se aplica as instrucoes or, xor, add, sub, slr e srr,
+  alterando apenas o ALUOp.
+
+Sinais de controle:
+  ALUOp      = 001 (and)
+  RegWrite   = 1
+  MUX_ULA_B  = 0 (Registrador)
+  MUX_RegIn  = 00 (Resultado da ULA)
+  MUX_Type   = 0  (ra)
+
+--------------------------------------------------------------------------------
+1010 | R | or  ra, rb  -- Or (bitwise)      ALUOp = 010
+1011 | R | xor ra, rb  -- Xor (bitwise)     ALUOp = 011
+1100 | R | add ra, rb  -- Add (signed)      ALUOp = 100
+1101 | R | sub ra, rb  -- Sub (signed)      ALUOp = 101
+1110 | R | slr ra, rb  -- Shift Left        ALUOp = 110
+1111 | R | srr ra, rb  -- Shift Right       ALUOp = 111
+  (demais sinais identicos ao and)
+--------------------------------------------------------------------------------
+
+
+================================================================================
+TABELA DE CODIGOS DA ULA
+================================================================================
+
+  ALUOp | Operacao
+  -------+---------
+   000   | not
+   001   | and
+   010   | or
+   011   | xor
+   100   | add
+   101   | sub
+   110   | slr
+   111   | srr
+
+
+================================================================================
+TABELA DE CONTROLE
+================================================================================
+
+Sinais de controle e seus significados:
+
+  MUX_Type   (1 bit)
+    Seleciona o endereco de ra conforme o tipo da instrucao.
+    0 -> Tipo R: usa ra diretamente
+    1 -> Tipo I: substitui ra por r0
+
+  ALUOp      (3 bits)
+    Seleciona a operacao da ULA. Ver tabela de codigos acima.
+
+  RegWrite   (1 bit)
+    Habilita escrita no banco de registradores.
+    0 -> Desabilitado
+    1 -> Habilitado
+
+  MemWrite   (1 bit)
+    Habilita escrita na memoria.
+    0 -> Desabilitado
+    1 -> Habilitado
+
+  MUX_RegIn  (2 bits)
+    Seleciona o dado a ser escrito no banco de registradores.
+    00 -> Resultado da ULA
+    01 -> Conteudo lido da memoria
+    10 -> Imediato (li)
+    11 -> Imediato extendido / shiftado (lui)
+
+  MUX_ULA_B  (1 bit)
+    Seleciona o segundo operando da ULA.
+    0 -> Registrador r2
+    1 -> Imediato
+
+  JAR        (1 bit)
+    Ativado quando a instrucao e jar.
+    0 -> Desabilitado
+    1 -> Habilitado
+
+  Branch     (1 bit)
+    Ativado quando a instrucao e brzr.
+    0 -> Desabilitado
+    1 -> Habilitado
+
+  MUX_SumPC  (1 bit)
+    Seleciona o incremento do PC.
+    0 -> Proxima instrucao (PC + 1)
+    1 -> Soma com imediato (PC + Imm)
+
+  MUX_PC     (mascara combinacional)
+    Seleciona a origem do proximo PC.
+    0 -> Deslocamento relativo (saida do somador)
+    1 -> Salto absoluto (valor de registrador)
+    Este sinal nao e gerado diretamente pelo decodificador; e resultado de
+    uma mascara: MUX_PC = JAR OR (Branch AND Zero), onde Zero indica que
+    R[ra] == 0.
+
+Tabela-verdade completa da unidade de controle:
+
+  opcode | MUX_Type  ALUOp  RegWrite  MemWrite  MUX_RegIn  MUX_ULA_B  JAR  Branch  MUX_SumPC
+  -------+-----------------------------------------------------------------------------------
+   0000  |    0       ---      0         0          --          -        0     1        0
+   0001  |    1       ---      0         0          --          -        0     0        1
+   0010  |    0       ---      1         0          01          -        0     0        0
+   0011  |    0       ---      0         1          --          -        0     0        0
+   0100  |    1       100      1         0          00          1        0     0        0
+   0101  |    1       ---      1         0          10          -        0     0        0
+   0110  |    1       ---      1         0          11          -        0     0        0
+   0111  |    -       ---      0         0          --          -        1     0        0
+   1000  |    0       000      1         0          00          0        0     0        0
+   1001  |    0       001      1         0          00          0        0     0        0
+   1010  |    0       010      1         0          00          0        0     0        0
+   1011  |    0       011      1         0          00          0        0     0        0
+   1100  |    0       100      1         0          00          0        0     0        0
+   1101  |    0       101      1         0          00          0        0     0        0
+   1110  |    0       110      1         0          00          0        0     0        0
+   1111  |    0       111      1         0          00          0        0     0        0
+
+
+================================================================================
+CODIGO ASSEMBLY
+================================================================================
+
+; VERSÃO PRINCIPAL com cálculo de endereço no loop e com as novas instruções
+
+main:	
+	; Inicia iterador
+	sub r3, r3		; r3 (i) = 0
+	
+	; Desvia para soma_vetor
+	ji 2
+
+fim: ji 0
+	
+soma_vetor:	
+	;------------------------------------
+	; if (i == tam) desvie para 'fim'
+	; -----------------------------------
+
+    ; r1(aux) = tam - i
+	li 7			; OBS: sobreescrição
+	addi 3			; r0 = tam
+
+	sub r1, r1	
+	add r1, r0		; r1 = tam
+	sub r1, r3		; r1 = r1(tam) - i
+
+	li 2            ; r0 = fim
+
+	brzr r1, r0		; se r1 == 0, desvie para 'fim'
+
+	; -----------------------------------
+	; Soma de rótulos e armazenamento
+	; -----------------------------------
+	; Calcula &A[i] (endereço base para vetores) e pega A[i]
+
+	; r0 = i + A (pos 25)
+    lui 2			; r0 = 32
+	addi -7
+	add r0, r3 		; r0 += i
+
+	; r1 = A[i] - Armazena em r1
+	ld r1, r0		; (Importante: A[i] sobrescreve o que tem em r1)
+
+	; ----------------------------------
+	; Calcula &B[i] e pega B[i]
+  ; -----------------------------------
+
+	; r0 = r0 (A+i) + 10 (tam de A)
+	addi 7			
+	addi 3
+
+	; r2 = B[i]
+	ld r2, r0
+
+	; ---------------------------------
+	; Calcula &R[i] e armazena soma de rótulos
+  ; -----------------------------------
+
+	; r0 = B + i + 10 = R + i
+    addi 7
+	addi 3
+
+	; r1 = A[i] + B[i]
+	add r1, r2
+
+	; R[i] = A[i] + B[i]
+    st r1, r0       ; M[r0] = R[r1]
+	
+	;------------------------------------
+	; Incrementa iterador - i++
+  ; -----------------------------------
+
+	li 1
+	add r3, r0
+
+	;------------------------------------	
+	; Desvia para soma_vetor
+  ; -----------------------------------
+
+	li 3			; r0 = soma_vetor
+	jar r0
+
+;----------------------------------------
+;Vetores:
+
+; Vetor A (pos 25):
+.bits8 0x00 0x02 0x04 0x06 0x08 0x0A 0x0C 0x0E 0x10 0x12
+
+; Vetor B:
+.bits8 0x01 0x03 0x05 0x07 0x09 0x0B 0x0D 0x0F 0x11 0x13
+
+; Vetor R:
+.bits8 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+
+================================================================================
+JUSTIFICATIVA PARA AS INSTRUCOES ADICIONADAS
+================================================================================
+
+--------------------------------------------------------------------------------
+lui imm  --  Load Upper Immediate
+Operacao: R[0] <- imm << 4
+--------------------------------------------------------------------------------
+
+A escolha desta instrucao foi motivada por uma das maiores limitacoes do
+REDUX-V original: a dificuldade de carregar enderecos grandes em registradores.
+No programa do Trabalho 1, era necessario encadear varios addi consecutivos ou
+recorrer a sequencias de shift pouco praticas para atingir enderecos como o
+inicio dos vetores. Com o lui, o processo e direto: carrega-se o nibble alto
+do endereco com um unico lui e completa-se o nibble baixo com um addi. Essa
+instrucao economizou aproximadamente 5 instrucoes em relacao a versao anterior
+do programa.
+
+--------------------------------------------------------------------------------
+li imm  --  Load Immediate
+Operacao: R[0] <- imm
+--------------------------------------------------------------------------------
+
+Ao longo do codigo, era recorrente a sequencia "sub r0, r0 -> addi X" para
+inicializar r0 com um valor pequeno antes de qualquer operacao com imediato.
+O li substitui essa sequencia de duas instrucoes por uma unica, tornando o
+codigo mais conciso. O ganho, embora aparentemente simples, e significativo
+dado o grande numero de vezes em que esse padrao se repete no corpo do loop.
+r0 nessa arquitetura e' usado como base para calculos com imediato, e, por isso,
+muda constantemente seu valor, sendo assim, a instrucao de sobreescricao é
+muito conveniente.
+
+--------------------------------------------------------------------------------
+jar rb  --  Jump for Address in Register
+Operacao: PC <- R[rb]  (salto absoluto)
+--------------------------------------------------------------------------------
+
+No REDUX-V original, saltos incondicionais para enderecos distantes exigiam
+uma sequencia de instrucoes pouco elegante: carregar o endereco em rb e
+forcara um branch com brzr zerando um registrador auxiliar. O jar resolve
+isso de forma limpa e direta. Alem de reduzir o numero de instrucoes, a
+instrucao torna o codigo consideravelmente mais legivel e adiciona ao ISA
+uma capacidade de salto incondicional longo que, na pratica, e indispensavel em
+qualquer arquitetura.
+
+================================================================================
