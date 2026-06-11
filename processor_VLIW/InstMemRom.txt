@@ -1,0 +1,10 @@
+v3.0 hex words addressed
+00: 61ffffff 78ffffff a8ffffff 60ffffff 70ffffff a4ffffff 60ffffff 7cffffff
+08: acffffff 56ff3fff ffff39ff 60ffffff 7effffff ff0cffff ff1affff 60ffffff
+10: 70ffffff a8ffffff a4ffffff 60ffffff 7cffffff acffffff 56ff3fff ffff3935
+18: 60ffffff 7bffffff ff0cffff ff1affff 60ffffff 7cffffff a8ffffff 61ffffff
+20: 74ffffff a4ffffff 60ffffff 7cffffff acffffff 56ff3fff ffff3935 60ffffff
+28: 7affffff ff0cffff ff1affff 60ffffff 7cffffff a4ffffff 61ffffff 78ffffff
+30: a8ffffff 60ffffff 7cffffff acffffff 60ffffff 7cffffff ffff93ff 40ffffff
+38: 45ffffff ffff81ff 52ffffff ffff3539 ffff3fff 64ffffff 73ffffff ff0cffff
+40: 63ffffff 74ffffff ff20ffff ffffffff
