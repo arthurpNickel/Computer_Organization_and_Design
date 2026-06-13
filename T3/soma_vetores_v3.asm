@@ -17,6 +17,8 @@
     # 6: Não desviarei para labels que estão abaixo da label atual
     # 7: Load/Store não mexem no endereço de acesso a memória
 
+#NOVAS INSTRUÇÕES: s.addli ra, limm e s.ji imm
+
 #QUESTIONS
     # ...
 
@@ -99,17 +101,11 @@ inicializa_vetores:
     v.add vr3, vr1      # vr3 = vr3 + vr1 / vr3 += 4 -> itera endereço - !!!!!!!!!!!!!!!
 
     # "if (i == 3) finaliza loop"
-    s.movh 0            # D2
-    s.movl 1            # Inicializa variavel de iteração
-    s.add sr3, sr1      # n--
+    s.addli sr3, -1     # n--
 
     s.brzr sr3, sr2     # Se sr3 == 0 -> pula para próximo label
 
-    # Se não...
-    s.movh Y            # Monta endereço de "inicializa_vetores"
-    s.movl X
-
-    s.brzr sr0, sr1     # Desvia para "inicializa_vetores"
+    s.ji -5             # Se não, desvia para "inicializa_vetores"
 
 soma_setup:
     # Inicializa iterador
@@ -120,13 +116,15 @@ soma_setup:
     s.sub sr3, sr3      # D2
     s.add sr3, sr1      # sr3 = 3
 
-    # Q: Inicializa endereço de fim -> Vale a pena?
-        # Posso usar espaço para colocar constante 1 (decremento) e outro para endereço de loop
-    
+    # Inicializa endereço de fim
     s.movh X            # sr1 = &fim
     s.movl Y
     s.sub sr2, sr2      # sr2 = 0
     s.add sr2, sr1      # sr2 = sr1
+
+    # Monta endereço de soma_vetores
+    s.movh X
+    s.movl Y
 
     # Inicializa endereços iniciais
     v.sub vr3, vr3      # vr3 = {0, 0, 0, 0}
@@ -152,11 +150,9 @@ soma_vetores:
     v.st vr2, vr3       # Guarda vetor resultado
 
     # "if (i == 3) finaliza programa"
-    s.movh 0            # D2
-    s.movl 1
-    s.sub sr3, sr1
+    s.addli sr3, -1     # n--
 
-    s.brzr sr3, sr2
+    s.brzr sr3, sr2     # Desvia para fim
 
     # Se não...
     # Monta próximo endereço base
@@ -164,17 +160,9 @@ soma_vetores:
     v.movl 12           # Considerei a parte de cima zerada por 3 instruções atrás
     v.sub vr3, vr1      #vr3 = vr3 - 12 (diminuiu 16 endereços para voltar ao vetor 1 e soma 4 para ir para o próximo bloco)
 
-    # Monta endereço de soma_vetores
-
-    s.movh X
-    s.movl Y
-
-    s.brzr sr0 sr1
+    s.brzr sr0 sr1      # Desvia para soma_vetores
 
 # Q: Se fim for endereço 0 é só zerar sr1 ou fazer sr0, sr0
 fim:
     # Loop infinito
-    s.movh X
-    s.movl Y
-    s.brzr sr0, sr1
-
+    s.ji 0
