@@ -172,7 +172,7 @@ end type_architecture;
   <circuit name="Redux_V">
     <a name="circuit" val="Redux_V"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="64.0"/>
+    <a name="simulationFrequency" val="32.0"/>
     <comp lib="0" loc="(1080,2020)" name="Splitter">
       <a name="appear" val="right"/>
       <a name="bit1" val="0"/>
@@ -1128,6 +1128,10 @@ end type_architecture;
     <comp lib="0" loc="(8410,1170)" name="Tunnel">
       <a name="label" val="Instrucao_IF_ID"/>
       <a name="width" val="8"/>
+    </comp>
+    <comp lib="0" loc="(8410,2360)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="Reset"/>
     </comp>
     <comp lib="0" loc="(8410,970)" name="Tunnel">
       <a name="label" val="PredictTaken_IF_ID"/>
@@ -2107,6 +2111,20 @@ end type_architecture;
     <wire from="(8300,2200)" to="(8300,2210)"/>
     <wire from="(8300,2270)" to="(8300,2290)"/>
     <wire from="(8310,1070)" to="(8410,1070)"/>
+    <wire from="(8310,1850)" to="(8310,1860)"/>
+    <wire from="(8310,1860)" to="(8410,1860)"/>
+    <wire from="(8310,1920)" to="(8310,1930)"/>
+    <wire from="(8310,1930)" to="(8410,1930)"/>
+    <wire from="(8310,1990)" to="(8310,2000)"/>
+    <wire from="(8310,2000)" to="(8410,2000)"/>
+    <wire from="(8310,2060)" to="(8310,2070)"/>
+    <wire from="(8310,2070)" to="(8410,2070)"/>
+    <wire from="(8310,2130)" to="(8310,2140)"/>
+    <wire from="(8310,2140)" to="(8410,2140)"/>
+    <wire from="(8310,2200)" to="(8310,2210)"/>
+    <wire from="(8310,2210)" to="(8410,2210)"/>
+    <wire from="(8310,2270)" to="(8310,2280)"/>
+    <wire from="(8310,2280)" to="(8410,2280)"/>
     <wire from="(8310,970)" to="(8410,970)"/>
     <wire from="(8320,1170)" to="(8410,1170)"/>
     <wire from="(8320,1830)" to="(8460,1830)"/>
@@ -2119,6 +2137,13 @@ end type_architecture;
     <wire from="(8380,1010)" to="(8380,1110)"/>
     <wire from="(8380,1110)" to="(8380,1210)"/>
     <wire from="(8380,1210)" to="(8380,1270)"/>
+    <wire from="(8410,1860)" to="(8410,1930)"/>
+    <wire from="(8410,1930)" to="(8410,2000)"/>
+    <wire from="(8410,2000)" to="(8410,2070)"/>
+    <wire from="(8410,2070)" to="(8410,2140)"/>
+    <wire from="(8410,2140)" to="(8410,2210)"/>
+    <wire from="(8410,2210)" to="(8410,2280)"/>
+    <wire from="(8410,2280)" to="(8410,2360)"/>
     <wire from="(9120,1980)" to="(9200,1980)"/>
     <wire from="(9120,2010)" to="(9130,2010)"/>
     <wire from="(9120,2040)" to="(9140,2040)"/>
