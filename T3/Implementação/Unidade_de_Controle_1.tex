@@ -1,0 +1,759 @@
+\documentclass [15pt,a4paper,twoside]{article}
+\usepackage[portuges,shorthands=off]{babel}        % shorhands=off is required for babel french in combination with tikz karnaugh....
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{verbose,a4paper, tmargin=3.5cm,bmargin=3.5cm,lmargin=2.5cm,rmargin=2.5cm,headsep=1cm,footskip=1.5cm}
+\usepackage{fancyhdr}
+\usepackage{colortbl}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz -timing}
+\usepackage{tikz}
+\usetikzlibrary{karnaugh}
+\pagestyle{fancy}
+
+\definecolor{LogisimKMapColor0}{RGB}{128,0,0}
+\definecolor{LogisimKMapColor1}{RGB}{230,25,75}
+\definecolor{LogisimKMapColor2}{RGB}{250,190,190}
+\definecolor{LogisimKMapColor3}{RGB}{170,110,40}
+\definecolor{LogisimKMapColor4}{RGB}{245,130,48}
+\definecolor{LogisimKMapColor5}{RGB}{255,215,180}
+\definecolor{LogisimKMapColor6}{RGB}{128,128,0}
+\definecolor{LogisimKMapColor7}{RGB}{255,255,25}
+\definecolor{LogisimKMapColor8}{RGB}{210,245,60}
+\definecolor{LogisimKMapColor9}{RGB}{0,0,128}
+\definecolor{LogisimKMapColor10}{RGB}{145,30,180}
+\definecolor{LogisimKMapColor11}{RGB}{60,180,175}
+\definecolor{LogisimKMapColor12}{RGB}{0,130,203}
+\definecolor{LogisimKMapColor13}{RGB}{230,190,255}
+\definecolor{LogisimKMapColor14}{RGB}{170,255,195}
+\definecolor{LogisimKMapColor15}{RGB}{240,50,230}
+
+\fancyhead{}
+\fancyhead[C] {Logisim-evolução gerada pelo documento em Mon Jun 15 10:25:55 BRT 2026}
+\fancyfoot[C] {\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\makeatother
+
+\begin{document}
+\section{Introdução}
+Este documento foi gerado por logisim-evolution. Qualquer parte das fontes do TeX pode ser usada em seus próprios documentos sem nenhum problema. Caso você queira usar todas/partes das fontes TeX geradas, por favor (1) não se esqueça de incluir os pacotes necessários, e (2) inclua uma observação de que esta fonte foi gerada pela logisim-evolução.
+%===============================================================================
+\section{Tabela da verdade}
+A tabela pode ser muito grande para ser exibida na página. No tempo de geração não foi feito nenhum cálculo sobre o tamanho da tabela em relação à largura/altura da página.
+%-------------------------------------------------------------------------------
+\subsection{Tabela da verdade compactada}
+\begin{center}
+\begin{tabular}{cccc|ccccccccccc}
+\multicolumn{4}{c|}{$Opcode[3..0]$}&\multicolumn{2}{c}{$AluOp[1..0]$}&\multicolumn{2}{c}{$MUX_RegIn[1..0]$}&$RegWrite$&$MemWrite$&$Type_Inst$&$PE$&$Branch$&$LI$&$Move$\\
+\hline
+$0$&$0$&$0$&$0$&$-$&$-$&$0$&$1$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$0$&$0$&$1$&$-$&$-$&$-$&$-$&$0$&$1$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$0$&$1$&$0$&$-$&$-$&$1$&$0$&$1$&$0$&$1$&$0$&$0$&$0$&$1$\\
+$0$&$0$&$1$&$1$&$-$&$-$&$1$&$0$&$1$&$0$&$1$&$0$&$0$&$0$&$0$\\
+$0$&$1$&$0$&$0$&$0$&$0$&$0$&$0$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$1$&$0$&$1$&$0$&$1$&$0$&$0$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$1$&$1$&$0$&$1$&$0$&$0$&$0$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$1$&$1$&$1$&$-$&$-$&$-$&$-$&$0$&$0$&$0$&$0$&$1$&$0$&$-$\\
+$1$&$0$&$0$&$0$&$-$&$-$&$0$&$1$&$1$&$0$&$0$&$1$&$0$&$0$&$-$\\
+$1$&$0$&$0$&$1$&$-$&$-$&$-$&$-$&$0$&$1$&$0$&$1$&$0$&$0$&$-$\\
+$1$&$0$&$1$&$0$&$-$&$-$&$1$&$0$&$1$&$0$&$1$&$1$&$0$&$0$&$1$\\
+$1$&$0$&$1$&$1$&$-$&$-$&$1$&$0$&$1$&$0$&$1$&$1$&$0$&$0$&$0$\\
+$1$&$1$&$0$&$0$&$0$&$0$&$0$&$0$&$1$&$0$&$0$&$1$&$0$&$0$&$-$\\
+$1$&$1$&$0$&$1$&$0$&$1$&$0$&$0$&$1$&$0$&$0$&$1$&$0$&$0$&$-$\\
+$1$&$1$&$1$&$0$&$-$&$-$&$1$&$1$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$1$&$1$&$1$&$1$&$0$&$0$&$0$&$0$&$1$&$0$&$0$&$0$&$0$&$1$&$-$\\
+
+\end{tabular}
+\end{center}
+%-------------------------------------------------------------------------------
+\subsection{Tabela da verdade completa}
+\begin{center}
+\begin{tabular}{cccc|ccccccccccc}
+\multicolumn{4}{c|}{$Opcode[3..0]$}&\multicolumn{2}{c}{$AluOp[1..0]$}&\multicolumn{2}{c}{$MUX_RegIn[1..0]$}&$RegWrite$&$MemWrite$&$Type_Inst$&$PE$&$Branch$&$LI$&$Move$\\
+\hline
+$0$&$0$&$0$&$0$&$-$&$-$&$0$&$1$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$0$&$0$&$1$&$-$&$-$&$-$&$-$&$0$&$1$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$0$&$1$&$0$&$-$&$-$&$1$&$0$&$1$&$0$&$1$&$0$&$0$&$0$&$1$\\
+$0$&$0$&$1$&$1$&$-$&$-$&$1$&$0$&$1$&$0$&$1$&$0$&$0$&$0$&$0$\\
+$0$&$1$&$0$&$0$&$0$&$0$&$0$&$0$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$1$&$0$&$1$&$0$&$1$&$0$&$0$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$1$&$1$&$0$&$1$&$0$&$0$&$0$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$0$&$1$&$1$&$1$&$-$&$-$&$-$&$-$&$0$&$0$&$0$&$0$&$1$&$0$&$-$\\
+$1$&$0$&$0$&$0$&$-$&$-$&$0$&$1$&$1$&$0$&$0$&$1$&$0$&$0$&$-$\\
+$1$&$0$&$0$&$1$&$-$&$-$&$-$&$-$&$0$&$1$&$0$&$1$&$0$&$0$&$-$\\
+$1$&$0$&$1$&$0$&$-$&$-$&$1$&$0$&$1$&$0$&$1$&$1$&$0$&$0$&$1$\\
+$1$&$0$&$1$&$1$&$-$&$-$&$1$&$0$&$1$&$0$&$1$&$1$&$0$&$0$&$0$\\
+$1$&$1$&$0$&$0$&$0$&$0$&$0$&$0$&$1$&$0$&$0$&$1$&$0$&$0$&$-$\\
+$1$&$1$&$0$&$1$&$0$&$1$&$0$&$0$&$1$&$0$&$0$&$1$&$0$&$0$&$-$\\
+$1$&$1$&$1$&$0$&$-$&$-$&$1$&$1$&$1$&$0$&$0$&$0$&$0$&$0$&$-$\\
+$1$&$1$&$1$&$1$&$0$&$0$&$0$&$0$&$1$&$0$&$0$&$0$&$0$&$1$&$-$\\
+
+\end{tabular}
+\end{center}
+%===============================================================================
+\section{Diagramas de Karnaugh}
+Esta secção mostra várias versões dos diagramas de Karnaugh das funções dadas.
+%-------------------------------------------------------------------------------
+\subsection{Diagramas de Karnaugh vazios}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$AluOp_{1}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$AluOp_{1}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$AluOp_{0}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$AluOp_{0}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$MUX_RegIn_{1}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$MUX_RegIn_{1}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$MUX_RegIn_{0}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$MUX_RegIn_{0}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$RegWrite$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$RegWrite$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$MemWrite$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$MemWrite$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$Type_Inst$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$Type_Inst$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$PE$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$PE$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$Branch$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$Branch$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$LI$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$LI$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$Move$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}{}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$Move$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+%-------------------------------------------------------------------------------
+\subsection{Preenchido com diagramas de Karnaugh}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$AluOp_{1}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{--00--1---00---0}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$AluOp_{1}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$AluOp_{0}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{--01--0---01---0}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$AluOp_{0}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$MUX_RegIn_{1}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0-00110-0-001110}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$MUX_RegIn_{1}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$MUX_RegIn_{0}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{1-00000-1-000010}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$MUX_RegIn_{0}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$RegWrite$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{1011111010111111}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$RegWrite$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$MemWrite$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0100000001000000}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$MemWrite$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$Type_Inst$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0000110000001100}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$Type_Inst$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$PE$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0000000011111100}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$PE$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$Branch$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0000000100000000}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$Branch$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$LI$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0000000000000001}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$LI$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$Move$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{----10------10--}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$Move$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+}
+\end{tikzpicture}
+\end{center}
+%-------------------------------------------------------------------------------
+\subsection{Preenchido com diagramas de Karnaugh com tampas}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$AluOp_{1}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{--00--1---00---0}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$AluOp_{1}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{1.8}{1.8}](n0) at(3,3) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$AluOp_{0}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{--01--0---01---0}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$AluOp_{0}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{0.8}{3.8}](n0) at(1.5,2) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$MUX_RegIn_{1}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0-00110-0-001110}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$MUX_RegIn_{1}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{1.8}{0.8}](n0) at(3,3.5) {};
+   \node[grp={LogisimKMapColor0}{1.8}{0.8}](n1) at(3,0.5) {};
+   \node[grp={LogisimKMapColor1}{0.8}{1.8}](n2) at(3.5,1) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$MUX_RegIn_{0}$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{1-00000-1-000010}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$MUX_RegIn_{0}$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{1.8}{0.8}](n0) at(1,3.5) {};
+   \node[grp={LogisimKMapColor0}{1.8}{0.8}](n1) at(1,0.5) {};
+   \node[grp={LogisimKMapColor1}{0.8}{0.8}](n2) at(3.5,1.5) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$RegWrite$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{1011111010111111}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$RegWrite$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{0.8}{3.8}](n0) at(0.5,2) {};
+   \node[grp={LogisimKMapColor0}{0.8}{3.8}](n1) at(3.5,2) {};
+   \node[grp={LogisimKMapColor1}{1.8}{0.8}](n2) at(3,3.5) {};
+   \node[grp={LogisimKMapColor1}{1.8}{0.8}](n3) at(3,0.5) {};
+   \node[grp={LogisimKMapColor2}{1.8}{1.8}](n4) at(1,2) {};
+   \node[grp={LogisimKMapColor3}{1.8}{1.8}](n5) at(3,1) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$MemWrite$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0100000001000000}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$MemWrite$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{0.8}{0.8}](n0) at(1.5,3.5) {};
+   \node[grp={LogisimKMapColor0}{0.8}{0.8}](n1) at(1.5,0.5) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$Type_Inst$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0000110000001100}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$Type_Inst$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{1.8}{0.8}](n0) at(3,3.5) {};
+   \node[grp={LogisimKMapColor0}{1.8}{0.8}](n1) at(3,0.5) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$PE$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0000000011111100}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$PE$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{3.8}{0.8}](n0) at(2,0.5) {};
+   \node[grp={LogisimKMapColor1}{1.8}{1.8}](n1) at(1,1) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$Branch$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0000000100000000}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$Branch$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{0.8}{0.8}](n0) at(2.5,2.5) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$LI$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{0000000000000001}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$LI$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{0.8}{0.8}](n0) at(2.5,1.5) {};
+}
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[karnaugh,disable bars,x=1\kmunitlength,y=1\kmunitlength,kmbar left sep=1\kmunitlength,grp/.style n args={4}{#1,fill=#1!30,minimum width= #2\kmunitlength,minimum height=#3\kmunitlength,rounded corners=0.2\kmunitlength,fill opacity=0.6,rectangle,draw}]
+\karnaughmap{4}{$Move$}{{$Opcode_3$}{$Opcode_1$}{$Opcode_2$}{$Opcode_0$}}
+{----10------10--}{
+\draw[kmbox] (-0.5,4.5)
+   node[below left]{$Opcode_{4}$, $Opcode_{3}$}
+   node[above right]{$Opcode_{2}$, $Opcode_{1}$, $Opcode_{0}$} +(-0.2,0.2)
+   node[above left]{$Move$};\draw (0,4) -- (-0.7,4.7);
+\foreach \x/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (\x+0.5,4.2) {\1};
+}
+\foreach \y/\1 in %
+{0/00,1/01,2/11,3/10} {
+   \node at (-0.4,-0.5-\y+4) {\1};
+}
+   \node[grp={LogisimKMapColor0}{0.8}{3.8}](n0) at(0.5,2) {};
+   \node[grp={LogisimKMapColor0}{0.8}{3.8}](n1) at(3.5,2) {};
+}
+\end{tikzpicture}
+\end{center}
+%===============================================================================
+\section{Expressões mínimas}
+$AluOp_{1} =  \overline{Opcode_{3}}  \cdot Opcode_{1}$~\\
+$AluOp_{0} =  \overline{Opcode_{1}}  \cdot Opcode_{0}$~\\
+$MUX_RegIn_{1} =  \overline{Opcode_{2}}  \cdot Opcode_{1}+Opcode_{3} \cdot Opcode_{1} \cdot  \overline{Opcode_{0}} $~\\
+$MUX_RegIn_{0} =  \overline{Opcode_{2}}  \cdot  \overline{Opcode_{1}} +Opcode_{3} \cdot Opcode_{2} \cdot Opcode_{1} \cdot  \overline{Opcode_{0}} $~\\
+$RegWrite =  \overline{Opcode_{0}} + \overline{Opcode_{2}}  \cdot Opcode_{1}+Opcode_{2} \cdot  \overline{Opcode_{1}} +Opcode_{3} \cdot Opcode_{1}$~\\
+$MemWrite =  \overline{Opcode_{2}}  \cdot  \overline{Opcode_{1}}  \cdot Opcode_{0}$~\\
+$Type_Inst =  \overline{Opcode_{2}}  \cdot Opcode_{1}$~\\
+$PE = Opcode_{3} \cdot  \overline{Opcode_{2}} +Opcode_{3} \cdot  \overline{Opcode_{1}} $~\\
+$Branch =  \overline{Opcode_{3}}  \cdot Opcode_{2} \cdot Opcode_{1} \cdot Opcode_{0}$~\\
+$LI = Opcode_{3} \cdot Opcode_{2} \cdot Opcode_{1} \cdot Opcode_{0}$~\\
+$Move =  \overline{Opcode_{0}} $~\\
+\end{document}
