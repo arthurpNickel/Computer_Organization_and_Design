@@ -8,6 +8,7 @@
     </tool>
     <tool name="Pin">
       <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
     </tool>
     <tool name="Constant">
       <a name="value" val="0x0"/>
@@ -20,6 +21,7 @@
   </lib>
   <lib desc="#Gates" name="1">
     <tool name="NOT Gate">
+      <a name="facing" val="north"/>
       <a name="size" val="20"/>
     </tool>
     <tool name="AND Gate">
@@ -27,6 +29,7 @@
       <a name="width" val="8"/>
     </tool>
     <tool name="OR Gate">
+      <a name="facing" val="south"/>
       <a name="size" val="30"/>
       <a name="width" val="8"/>
     </tool>
@@ -82,8 +85,7 @@
   <lib desc="#BFH-Praktika" name="10"/>
   <lib desc="#Input/Output-Extra" name="11"/>
   <lib desc="#Soc" name="12"/>
-  <lib desc="file#/home/brunoh/Documentos/arquitetura/Computer_Organization_and_Design/processor_VLIW/Processador_Redux_Pipeline.circ" name="13"/>
-  <lib desc="file#/home/brunoh/Documentos/arquitetura/Computer_Organization_and_Design/processor_VLIW/somadores.circ" name="14"/>
+  <lib desc="file#/home/brunoh/Documentos/arquitetura/Computer_Organization_and_Design/processor_VLIW/somadores.circ" name="13"/>
   <main name="VLIW"/>
   <options>
     <a name="gateUndefined" val="ignore"/>
@@ -2619,7 +2621,7 @@
       <a name="inputs" val="5"/>
     </comp>
     <comp lib="1" loc="(1050,920)" name="NOT Gate"/>
-    <comp lib="14" loc="(1090,630)" name="KoggeStone8Bit"/>
+    <comp lib="13" loc="(1090,630)" name="KoggeStone8Bit"/>
     <comp lib="2" loc="(1080,1050)" name="Multiplexer">
       <a name="width" val="8"/>
     </comp>
@@ -4299,7 +4301,7 @@
     <comp lib="1" loc="(540,940)" name="AND Gate">
       <a name="size" val="30"/>
     </comp>
-    <comp lib="14" loc="(1090,630)" name="KoggeStone8Bit"/>
+    <comp lib="13" loc="(1090,630)" name="KoggeStone8Bit"/>
     <comp lib="2" loc="(1080,1050)" name="Multiplexer">
       <a name="width" val="8"/>
     </comp>
