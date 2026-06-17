@@ -36,12 +36,12 @@ main:
     # Inicializa endereços de jump --------------
 
     # sr2 recebe endereço do inicializa_2
-    s.movl X
+    s.movh X
     s.movl Y
     s.mvr sr2, sr1
 
     # sr1 recebe endeço de inicializa_vetores
-    s.movl X
+    s.movh X
     s.movl Y
 
     # Inicializa dados iniciais -----------------
@@ -70,7 +70,7 @@ inicializa_2:
     # Inicializa endereços de jump ---------------
 
     # sr2 recebe endereço do próximo label
-    s.movl X
+    s.movh X
     s.movl Y
     s.mvr sr2, sr1
 
@@ -133,7 +133,7 @@ soma_vetores:
 
     # Monta endereço do vetor 2 em vr1
     v.movh 0            # vr1 = 12
-    v.movl 12           # T: Na verdade é um número negativo que é igual 12 mas na representação complemento de 2
+    v.movl -4           # 12 em complemento de 2
     v.add vr3, vr1
 
     v.ld vr1, vr3       # Carrega 1/3 do vetor 2 em vr1
@@ -142,7 +142,7 @@ soma_vetores:
 
     # Monta endereço do vetor resultado em vr1
     v.movh 0
-    v.movl 12
+    v.movl -4
     v.add vr3, vr1
 
     v.st vr2, vr3       # Guarda vetor resultado
@@ -154,9 +154,9 @@ soma_vetores:
 
     # Se não...
     # Monta próximo endereço base
-    # T: ARRUMAR AQUI!!!
-    v.movl 12           # Considerei a parte de cima zerada por 3 instruções atrás
-    v.sub vr3, vr1      #vr3 = vr3 - 12 (diminuiu 16 endereços para voltar ao vetor 1 e soma 4 para ir para o próximo bloco)
+    v.movh 1
+    v.movl 4
+    v.sub vr3, vr1      #vr3 = vr3 - 20 (diminuiu 24 endereços para voltar ao vetor 1 e soma 4 para ir para o próximo bloco)
 
     s.brzr sr0 sr1      # Desvia para soma_vetores
 
