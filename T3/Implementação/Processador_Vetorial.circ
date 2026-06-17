@@ -173,7 +173,7 @@ end type_architecture;
     <a name="circuit" val="Sagui_Vetorial"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="clabelup" val="west"/>
-    <a name="simulationFrequency" val="8.0"/>
+    <a name="simulationFrequency" val="32.0"/>
     <comp lib="0" loc="(10000,3300)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="R_rb_EX_MEM_V0"/>

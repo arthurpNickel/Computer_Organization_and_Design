@@ -36,13 +36,13 @@ main:
     # Inicializa endereços de jump --------------
 
     # sr2 recebe endereço do inicializa_2
-    s.movh X
-    s.movl Y
+    s.movh 0
+    s.movl -1
     s.mvr sr2, sr1
 
-    # sr1 recebe endeço de inicializa_vetores
-    s.movh X
-    s.movl Y
+    # sr1 recebe endeço de inicializa_vetores 
+    s.movh 1
+    s.movl -7
 
     # Inicializa dados iniciais -----------------
     v.sub vr2, vr2      # vr2 = {0, 0, 0, 0} - D1
@@ -69,9 +69,9 @@ inicializa_2:
 
     # Inicializa endereços de jump ---------------
 
-    # sr2 recebe endereço do próximo label
-    s.movh X
-    s.movl Y
+    # sr2 recebe endereço do próximo label - soma_setup
+    s.movh 1
+    s.movl -1
     s.mvr sr2, sr1
 
     # D6
@@ -116,13 +116,13 @@ soma_setup:
     # Q: Inicializa endereço de fim -> Vale a pena?
         # Posso usar espaço para colocar constante 1 (decremento) e outro para endereço de loop
     
-    s.movh X            # sr1 = &fim
-    s.movl Y
+    s.movh 3            # sr1 = &fim
+    s.movl -7
     s.mvr sr2, sr1      # sr2 = sr1
 
     # Monta endereço de soma_vetores
-    s.movh X
-    s.movl Y
+    s.movh 2
+    s.movl -7
 
     # Inicializa endereços iniciais
     v.sub vr3, vr3      # vr3 = {0, 0, 0, 0}
@@ -163,6 +163,6 @@ soma_vetores:
 # Q: Se fim for endereço 0 é só zerar sr1 ou fazer sr0, sr0
 fim:
     # Loop infinito
-    s.movh X
-    s.movl Y
+    s.movh 3
+    s.movl -7
     s.brzr sr0, sr1
