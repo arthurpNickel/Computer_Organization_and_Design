@@ -13,16 +13,13 @@
 #DECISÕES (D)
     # 1: Antes de usar, todos os registradores foram zerados antes
     # 2: Mesmo que eu saiba que o dado está zerado, eu vou zerá-lo de novo por precaução
-    # 3: inicialização dos dados do segundo vetor!!!!!!!!!!!!!!!!!
-    # 4: Considerei que os endereços chegam certos em ... para a inicialização do segundo vetor
+    # 3: Considerei que vr2 chega com {12, 13, 14, 15} e vr1 com {4, 4, 4, 4} eem inializa_2
+    # 4: Considerei que os endereços chegam certos em inicializa_2 para a inicialização do segundo vetor
     # 5: Considerei que o vr1 se manterá com constante 4 na inicialização dos 2 vetores
     # 6: Não desviarei para labels que estão abaixo da label atual
     # 7: Load/Store não mexem no endereço de acesso a memória
 
 #NOVAS INSTRUÇÕES: s.addli ra, limm e s.mvr sra srb
-
-#QUESTIONS
-    # ...
 
 main: 
 #"Inicializa_1"
@@ -74,13 +71,11 @@ inicializa_2:
     s.movl -1
     s.mvr sr2, sr1
 
-    # D6
+    # sr1 recebe endereço de inicializa_vetores (loop)
+    s.movh 1
+    s.movl -7
 
-    # Inicializa dados iniciais - 20 (10100) -----
-    v.movl 4
-    v.movh 1
-
-    # Considerando que vr2 chega com {12, 13, 14, 15} e vr1 com {4, 4, 4, 4}
+    # D3
     v.add vr2, vr1      # vr2 = {16, 17, 18, 19}
     v.add vr2, vr1      # vr2 = {20, 21, 22, 23}
 
@@ -90,13 +85,12 @@ inicializa_2:
 
     # D6
 
+# Ao desviar para cá, tem que ter o endereço em VR3, dados em VR2 e 4 em VR1
 inicializa_vetores:
-    # Estou considerando que endereço está em VR3, dados em VR2 e 4 em VR1 !!!
-
     v.st vr2, vr3       # Guarda dados na memória
 
     v.add vr2, vr1      # vr2 = vr2 + vr1 / vr2 += 4 -> itera dados - estão em sequência
-    v.add vr3, vr1      # vr3 = vr3 + vr1 / vr3 += 4 -> itera endereço - !!!!!!!!!!!!!!!
+    v.add vr3, vr1      # vr3 = vr3 + vr1 / vr3 += 4 -> itera endereço
 
     # "if (i == 3) finaliza loop"
     s.addli sr3, -1     # n--
@@ -113,9 +107,7 @@ soma_setup:
     s.movl 3
     s.mvr sr3, sr1      # sr3 = 3
 
-    # Q: Inicializa endereço de fim -> Vale a pena?
-        # Posso usar espaço para colocar constante 1 (decremento) e outro para endereço de loop
-    
+    # Inicializa endereço de fim
     s.movh 3            # sr1 = &fim
     s.movl -7
     s.mvr sr2, sr1      # sr2 = sr1
@@ -131,16 +123,16 @@ soma_setup:
 soma_vetores:
     v.ld vr2, vr3       # Carrega 1/3 do vetor 1 em vr2
 
-    # Monta endereço do vetor 2 em vr1
+    # Monta o endereço do vetor 2 em vr3
     v.movh 0            # vr1 = 12
     v.movl -4           # 12 em complemento de 2
-    v.add vr3, vr1
+    v.add vr3, vr1      # vr3 = endereço vetor 2
 
     v.ld vr1, vr3       # Carrega 1/3 do vetor 2 em vr1
 
     v.add vr2, vr1      # Soma vetor 1 e 2 e armazena em vr2
 
-    # Monta endereço do vetor resultado em vr1
+    # Monta endereço do vetor resultado em vr3
     v.movh 0
     v.movl -4
     v.add vr3, vr1
@@ -156,11 +148,11 @@ soma_vetores:
     # Monta próximo endereço base
     v.movh 1
     v.movl 4
-    v.sub vr3, vr1      #vr3 = vr3 - 20 (diminuiu 24 endereços para voltar ao vetor 1 e soma 4 para ir para o próximo bloco)
+    v.sub vr3, vr1      #vr3 = vr3 - 20
+                        #(diminuiu 24 endereços para voltar ao vetor 1 e soma 4 para ir para o próximo bloco)
 
     s.brzr sr0 sr1      # Desvia para soma_vetores
 
-# Q: Se fim for endereço 0 é só zerar sr1 ou fazer sr0, sr0
 fim:
     # Loop infinito
     s.movh 3
