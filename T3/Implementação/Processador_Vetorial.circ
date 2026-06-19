@@ -208,7 +208,7 @@ end type_architecture;
     </comp>
     <comp lib="0" loc="(1020,3490)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="R_rb_EX_2"/>
+      <a name="label" val="R_rb_EX_2_S"/>
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(10340,3380)" name="Tunnel">
@@ -604,7 +604,7 @@ end type_architecture;
     </comp>
     <comp lib="0" loc="(340,3400)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="R_rb_EX_2"/>
+      <a name="label" val="R_rb_EX_2_S"/>
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(340,3430)" name="Tunnel">
@@ -807,7 +807,7 @@ end type_architecture;
     </comp>
     <comp lib="0" loc="(5530,3390)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="Data_WB_V"/>
+      <a name="label" val="Data_WB_V0"/>
       <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(5530,3420)" name="Tunnel">
