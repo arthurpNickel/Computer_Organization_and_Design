@@ -206,11 +206,6 @@ end type_architecture;
     <comp lib="0" loc="(1010,3400)" name="Constant">
       <a name="width" val="8"/>
     </comp>
-    <comp lib="0" loc="(1020,3490)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="R_rb_EX_2_S"/>
-      <a name="width" val="8"/>
-    </comp>
     <comp lib="0" loc="(10340,3380)" name="Tunnel">
       <a name="label" val="MemDataOut_MEM_V0"/>
       <a name="width" val="8"/>
@@ -289,6 +284,11 @@ end type_architecture;
     <comp lib="0" loc="(10870,3850)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="clk_proc"/>
+    </comp>
+    <comp lib="0" loc="(1090,3490)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Endereco_Corrigido"/>
+      <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(1100,3430)" name="Tunnel">
       <a name="facing" val="east"/>
@@ -1586,13 +1586,34 @@ end type_architecture;
       <a name="facing" val="east"/>
       <a name="label" val="Move_ID_EX_V"/>
     </comp>
-    <comp lib="0" loc="(8700,6030)" name="Tunnel">
+    <comp lib="0" loc="(8590,5980)" name="Constant">
+      <a name="width" val="8"/>
+    </comp>
+    <comp lib="0" loc="(8600,6020)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="PC_Out_ID_EX"/>
+      <a name="width" val="8"/>
+    </comp>
+    <comp lib="0" loc="(8670,6060)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="R_rb_EX_2_S"/>
+      <a name="width" val="8"/>
+    </comp>
+    <comp lib="0" loc="(8700,5780)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="PredictTaken_ID_EX"/>
     </comp>
-    <comp lib="0" loc="(8700,6070)" name="Tunnel">
+    <comp lib="0" loc="(8700,5820)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="Taken_EX"/>
+    </comp>
+    <comp lib="0" loc="(8710,6100)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="Taken_EX"/>
+    </comp>
+    <comp lib="0" loc="(8760,6030)" name="Tunnel">
+      <a name="label" val="Endereco_Corrigido"/>
+      <a name="width" val="8"/>
     </comp>
     <comp lib="0" loc="(8770,3420)" name="Tunnel">
       <a name="label" val="ULA_Out_EX_V0"/>
@@ -1602,7 +1623,7 @@ end type_architecture;
       <a name="label" val="Reg_Mv_EX_V0"/>
       <a name="width" val="8"/>
     </comp>
-    <comp lib="0" loc="(8850,6050)" name="Tunnel">
+    <comp lib="0" loc="(8850,5800)" name="Tunnel">
       <a name="label" val="Flush"/>
     </comp>
     <comp lib="0" loc="(9150,1750)" name="Tunnel">
@@ -1817,7 +1838,7 @@ end type_architecture;
     <comp lib="1" loc="(6530,3610)" name="OR Gate">
       <a name="facing" val="north"/>
     </comp>
-    <comp lib="1" loc="(8810,6050)" name="XOR Gate"/>
+    <comp lib="1" loc="(8810,5800)" name="XOR Gate"/>
     <comp lib="11" loc="(10050,6190)" name="Digital Oscilloscope">
       <a name="inputs" val="1"/>
     </comp>
@@ -1942,7 +1963,11 @@ end type_architecture;
       <a name="select" val="2"/>
       <a name="width" val="8"/>
     </comp>
+    <comp lib="2" loc="(8730,6030)" name="Multiplexer">
+      <a name="width" val="8"/>
+    </comp>
     <comp lib="3" loc="(1100,3380)" name="Adder"/>
+    <comp lib="3" loc="(8670,6000)" name="Adder"/>
     <comp lib="5" loc="(10070,3290)" name="RAM">
       <a name="appearance" val="classic"/>
       <a name="label" val="RAM_V0"/>
@@ -2356,7 +2381,7 @@ end type_architecture;
       <a name="font" val="SansSerif plain 40"/>
       <a name="text" val="EXECUTE (EX)"/>
     </comp>
-    <comp lib="9" loc="(8700,5990)" name="Text">
+    <comp lib="9" loc="(8700,5740)" name="Text">
       <a name="font" val="SansSerif plain 20"/>
       <a name="text" val="Previção Certa?"/>
     </comp>
@@ -2444,7 +2469,6 @@ end type_architecture;
     <wire from="(10190,5890)" to="(10190,5930)"/>
     <wire from="(10190,5890)" to="(10310,5890)"/>
     <wire from="(10190,5930)" to="(10230,5930)"/>
-    <wire from="(1020,3490)" to="(1250,3490)"/>
     <wire from="(10230,5930)" to="(10230,5960)"/>
     <wire from="(10280,5640)" to="(10280,5860)"/>
     <wire from="(10310,3380)" to="(10340,3380)"/>
@@ -2497,6 +2521,7 @@ end type_architecture;
     <wire from="(10870,3600)" to="(10970,3600)"/>
     <wire from="(10870,3690)" to="(10870,3850)"/>
     <wire from="(10870,3690)" to="(10970,3690)"/>
+    <wire from="(1090,3490)" to="(1250,3490)"/>
     <wire from="(10950,1860)" to="(10950,1870)"/>
     <wire from="(10950,1950)" to="(10950,1960)"/>
     <wire from="(10950,2040)" to="(10950,2050)"/>
@@ -3387,11 +3412,25 @@ end type_architecture;
     <wire from="(8530,3420)" to="(8540,3420)"/>
     <wire from="(8530,3570)" to="(8530,3610)"/>
     <wire from="(8530,3610)" to="(8540,3610)"/>
-    <wire from="(8700,6030)" to="(8750,6030)"/>
-    <wire from="(8700,6070)" to="(8750,6070)"/>
+    <wire from="(8590,5980)" to="(8610,5980)"/>
+    <wire from="(8600,6020)" to="(8610,6020)"/>
+    <wire from="(8610,5980)" to="(8610,5990)"/>
+    <wire from="(8610,5990)" to="(8630,5990)"/>
+    <wire from="(8610,6010)" to="(8610,6020)"/>
+    <wire from="(8610,6010)" to="(8630,6010)"/>
+    <wire from="(8670,6000)" to="(8690,6000)"/>
+    <wire from="(8670,6060)" to="(8690,6060)"/>
+    <wire from="(8690,6000)" to="(8690,6020)"/>
+    <wire from="(8690,6020)" to="(8700,6020)"/>
+    <wire from="(8690,6040)" to="(8690,6060)"/>
+    <wire from="(8690,6040)" to="(8700,6040)"/>
+    <wire from="(8700,5780)" to="(8750,5780)"/>
+    <wire from="(8700,5820)" to="(8750,5820)"/>
+    <wire from="(8710,6050)" to="(8710,6100)"/>
+    <wire from="(8730,6030)" to="(8760,6030)"/>
     <wire from="(8760,3420)" to="(8770,3420)"/>
     <wire from="(8760,3610)" to="(8770,3610)"/>
-    <wire from="(8810,6050)" to="(8850,6050)"/>
+    <wire from="(8810,5800)" to="(8850,5800)"/>
     <wire from="(9150,1750)" to="(9310,1750)"/>
     <wire from="(9150,1830)" to="(9310,1830)"/>
     <wire from="(9150,1930)" to="(9310,1930)"/>

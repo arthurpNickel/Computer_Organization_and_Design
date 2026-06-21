@@ -172,7 +172,7 @@ end type_architecture;
   <circuit name="Redux_V">
     <a name="circuit" val="Redux_V"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="32.0"/>
+    <a name="simulationFrequency" val="64.0"/>
     <comp lib="0" loc="(1080,2020)" name="Splitter">
       <a name="appear" val="right"/>
       <a name="bit1" val="0"/>
