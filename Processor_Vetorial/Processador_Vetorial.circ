@@ -3567,7 +3567,7 @@ end type_architecture;
       <a name="font" val="SansSerif plain 40"/>
       <a name="text" val="I. FETCH (IF)"/>
     </comp>
-    <comp lib="9" loc="(2099,5551)" name="Text">
+    <comp lib="9" loc="(2095,5550)" name="Text">
       <a name="text" val="Memória de Instruções"/>
     </comp>
     <comp lib="9" loc="(2100,5830)" name="Text">
@@ -3601,7 +3601,7 @@ end type_architecture;
       <a name="font" val="SansSerif plain 40"/>
       <a name="text" val="ID/EX"/>
     </comp>
-    <comp lib="9" loc="(7376,1844)" name="Text">
+    <comp lib="9" loc="(7375,1840)" name="Text">
       <a name="font" val="SansSerif plain 40"/>
       <a name="text" val="FORWARDING"/>
     </comp>
@@ -5855,161 +5855,6 @@ end type_architecture;
     <wire from="(590,330)" to="(590,370)"/>
     <wire from="(600,400)" to="(600,530)"/>
   </circuit>
-  <circuit name="Shifter_Left">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="Shifter_Left"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="clabelfont" val="SansSerif bold 10"/>
-    <a name="simulationFrequency" val="32.0"/>
-    <comp lib="0" loc="(430,440)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="ULA_A"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(430,460)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="ULA_B"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(450,460)" name="Splitter">
-      <a name="appear" val="right"/>
-      <a name="bit1" val="0"/>
-      <a name="bit2" val="0"/>
-      <a name="bit3" val="1"/>
-      <a name="bit4" val="1"/>
-      <a name="bit5" val="1"/>
-      <a name="bit6" val="2"/>
-      <a name="bit7" val="2"/>
-      <a name="fanout" val="3"/>
-      <a name="incoming" val="8"/>
-    </comp>
-    <comp lib="0" loc="(510,480)" name="Splitter">
-      <a name="appear" val="right"/>
-      <a name="fanout" val="3"/>
-      <a name="incoming" val="3"/>
-    </comp>
-    <comp lib="0" loc="(510,540)" name="Splitter"/>
-    <comp lib="0" loc="(590,470)" name="Constant">
-      <a name="value" val="0x0"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(670,460)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="ULA_OUT"/>
-      <a name="type" val="output"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="1" loc="(580,510)" name="OR Gate">
-      <a name="inputs" val="5"/>
-      <a name="size" val="30"/>
-    </comp>
-    <comp lib="2" loc="(630,460)" name="Multiplexer">
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="3" loc="(560,450)" name="Shifter"/>
-    <comp lib="9" loc="(565,560)" name="Text">
-      <a name="font" val="SansSerif plain 12"/>
-      <a name="text" val="Se o shift tiver overflow, então o resultado do shift será 0"/>
-    </comp>
-    <wire from="(430,440)" to="(520,440)"/>
-    <wire from="(430,460)" to="(450,460)"/>
-    <wire from="(470,470)" to="(480,470)"/>
-    <wire from="(470,480)" to="(510,480)"/>
-    <wire from="(470,490)" to="(500,490)"/>
-    <wire from="(480,460)" to="(480,470)"/>
-    <wire from="(480,460)" to="(520,460)"/>
-    <wire from="(500,490)" to="(500,540)"/>
-    <wire from="(500,540)" to="(510,540)"/>
-    <wire from="(530,490)" to="(550,490)"/>
-    <wire from="(530,500)" to="(550,500)"/>
-    <wire from="(530,510)" to="(550,510)"/>
-    <wire from="(530,520)" to="(550,520)"/>
-    <wire from="(530,530)" to="(550,530)"/>
-    <wire from="(560,450)" to="(600,450)"/>
-    <wire from="(580,510)" to="(610,510)"/>
-    <wire from="(590,470)" to="(600,470)"/>
-    <wire from="(610,480)" to="(610,510)"/>
-    <wire from="(630,460)" to="(670,460)"/>
-  </circuit>
-  <circuit name="Shift_Right">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="Shift_Right"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="32.0"/>
-    <comp lib="0" loc="(500,350)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="ULA_A"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(500,370)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="label" val="ULA_B"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(520,370)" name="Splitter">
-      <a name="appear" val="right"/>
-      <a name="bit1" val="0"/>
-      <a name="bit2" val="0"/>
-      <a name="bit3" val="1"/>
-      <a name="bit4" val="1"/>
-      <a name="bit5" val="1"/>
-      <a name="bit6" val="2"/>
-      <a name="bit7" val="2"/>
-      <a name="fanout" val="3"/>
-      <a name="incoming" val="8"/>
-    </comp>
-    <comp lib="0" loc="(580,390)" name="Splitter">
-      <a name="appear" val="right"/>
-      <a name="fanout" val="3"/>
-      <a name="incoming" val="3"/>
-    </comp>
-    <comp lib="0" loc="(580,450)" name="Splitter"/>
-    <comp lib="0" loc="(660,380)" name="Constant">
-      <a name="value" val="0x0"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="0" loc="(740,370)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="ULA_OUT"/>
-      <a name="type" val="output"/>
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="1" loc="(650,420)" name="OR Gate">
-      <a name="inputs" val="5"/>
-      <a name="size" val="30"/>
-    </comp>
-    <comp lib="2" loc="(700,370)" name="Multiplexer">
-      <a name="width" val="8"/>
-    </comp>
-    <comp lib="3" loc="(630,360)" name="Shifter">
-      <a name="shift" val="lr"/>
-    </comp>
-    <comp lib="9" loc="(635,470)" name="Text">
-      <a name="font" val="SansSerif plain 12"/>
-      <a name="text" val="Se o shift tiver overflow, então o resultado do shift será 0"/>
-    </comp>
-    <wire from="(500,350)" to="(590,350)"/>
-    <wire from="(500,370)" to="(520,370)"/>
-    <wire from="(540,380)" to="(550,380)"/>
-    <wire from="(540,390)" to="(580,390)"/>
-    <wire from="(540,400)" to="(570,400)"/>
-    <wire from="(550,370)" to="(550,380)"/>
-    <wire from="(550,370)" to="(590,370)"/>
-    <wire from="(570,400)" to="(570,450)"/>
-    <wire from="(570,450)" to="(580,450)"/>
-    <wire from="(600,400)" to="(620,400)"/>
-    <wire from="(600,410)" to="(620,410)"/>
-    <wire from="(600,420)" to="(620,420)"/>
-    <wire from="(600,430)" to="(620,430)"/>
-    <wire from="(600,440)" to="(620,440)"/>
-    <wire from="(630,360)" to="(670,360)"/>
-    <wire from="(650,420)" to="(680,420)"/>
-    <wire from="(660,380)" to="(670,380)"/>
-    <wire from="(680,390)" to="(680,420)"/>
-    <wire from="(700,370)" to="(740,370)"/>
-  </circuit>
   <circuit name="Unidade_de_Controle">
     <a name="appearance" val="logisim_evolution"/>
     <a name="circuit" val="Unidade_de_Controle"/>
@@ -6315,27 +6160,6 @@ end type_architecture;
     <wire from="(680,60)" to="(680,140)"/>
     <wire from="(690,110)" to="(700,110)"/>
     <wire from="(690,40)" to="(690,110)"/>
-  </circuit>
-  <circuit name="Teste_clk">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="Teste_clk"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(910,840)" name="Clock">
-      <a name="appearance" val="NewPins"/>
-      <a name="phaseOffset" val="3"/>
-    </comp>
-    <comp lib="0" loc="(910,870)" name="Clock">
-      <a name="appearance" val="NewPins"/>
-      <a name="highDuration" val="2"/>
-      <a name="lowDuration" val="2"/>
-      <a name="phaseOffset" val="3"/>
-    </comp>
-    <comp lib="11" loc="(1000,840)" name="Digital Oscilloscope">
-      <a name="inputs" val="1"/>
-    </comp>
-    <wire from="(910,840)" to="(1000,840)"/>
-    <wire from="(910,870)" to="(1000,870)"/>
   </circuit>
   <circuit name="Controle_Forwading">
     <a name="appearance" val="logisim_evolution"/>
@@ -7607,75 +7431,6 @@ end type_architecture;
     <wire from="(700,290)" to="(730,290)"/>
     <wire from="(700,350)" to="(740,350)"/>
     <wire from="(990,440)" to="(1030,440)"/>
-  </circuit>
-  <circuit name="Reset_Inicial">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="Reset_Inicial"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="32.0"/>
-    <comp lib="0" loc="(470,270)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="Z1"/>
-    </comp>
-    <comp lib="0" loc="(550,270)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="Z0"/>
-    </comp>
-    <comp lib="0" loc="(720,300)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="south"/>
-      <a name="label" val="clk_mem"/>
-    </comp>
-    <comp lib="0" loc="(770,540)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Reset"/>
-      <a name="type" val="output"/>
-    </comp>
-    <comp lib="0" loc="(840,370)" name="Tunnel">
-      <a name="label" val="Z1"/>
-    </comp>
-    <comp lib="0" loc="(840,460)" name="Tunnel">
-      <a name="label" val="Z0"/>
-    </comp>
-    <comp lib="1" loc="(490,320)" name="NOT Gate">
-      <a name="facing" val="south"/>
-    </comp>
-    <comp lib="1" loc="(570,320)" name="NOT Gate">
-      <a name="facing" val="south"/>
-    </comp>
-    <comp lib="1" loc="(690,370)" name="OR Gate"/>
-    <comp lib="1" loc="(690,460)" name="AND Gate"/>
-    <comp lib="5" loc="(760,360)" name="D Flip-Flop">
-      <a name="appearance" val="logisim_evolution"/>
-    </comp>
-    <comp lib="5" loc="(760,450)" name="D Flip-Flop">
-      <a name="appearance" val="logisim_evolution"/>
-    </comp>
-    <wire from="(470,270)" to="(470,280)"/>
-    <wire from="(470,280)" to="(470,390)"/>
-    <wire from="(470,280)" to="(490,280)"/>
-    <wire from="(470,390)" to="(640,390)"/>
-    <wire from="(490,280)" to="(490,290)"/>
-    <wire from="(490,320)" to="(490,480)"/>
-    <wire from="(490,480)" to="(490,540)"/>
-    <wire from="(490,480)" to="(640,480)"/>
-    <wire from="(490,540)" to="(770,540)"/>
-    <wire from="(550,270)" to="(550,280)"/>
-    <wire from="(550,280)" to="(550,350)"/>
-    <wire from="(550,280)" to="(570,280)"/>
-    <wire from="(550,350)" to="(640,350)"/>
-    <wire from="(570,280)" to="(570,290)"/>
-    <wire from="(570,320)" to="(570,440)"/>
-    <wire from="(570,440)" to="(640,440)"/>
-    <wire from="(690,370)" to="(750,370)"/>
-    <wire from="(690,460)" to="(750,460)"/>
-    <wire from="(720,300)" to="(720,410)"/>
-    <wire from="(720,410)" to="(720,500)"/>
-    <wire from="(720,410)" to="(750,410)"/>
-    <wire from="(720,500)" to="(750,500)"/>
-    <wire from="(810,370)" to="(840,370)"/>
-    <wire from="(810,460)" to="(840,460)"/>
   </circuit>
   <circuit name="Juntador">
     <a name="appearance" val="logisim_evolution"/>
