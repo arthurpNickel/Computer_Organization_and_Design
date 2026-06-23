@@ -173,7 +173,7 @@ end type_architecture;
     <a name="circuit" val="Sagui_Vetorial"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="clabelup" val="west"/>
-    <a name="simulationFrequency" val="32.0"/>
+    <a name="simulationFrequency" val="128.0"/>
     <comp lib="0" loc="(10180,2740)" name="Clock">
       <a name="appearance" val="NewPins"/>
       <a name="labelloc" val="north"/>
@@ -359,22 +359,6 @@ end type_architecture;
     <comp lib="0" loc="(10320,5320)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="clk_mem"/>
-    </comp>
-    <comp lib="0" loc="(10350,2250)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="Reset"/>
-    </comp>
-    <comp lib="0" loc="(10360,3210)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="Reset"/>
-    </comp>
-    <comp lib="0" loc="(10370,4140)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="Reset"/>
-    </comp>
-    <comp lib="0" loc="(10370,5090)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="Reset"/>
     </comp>
     <comp lib="0" loc="(10580,2380)" name="Tunnel">
       <a name="label" val="MemDataOut_MEM_V3"/>
@@ -3783,10 +3767,6 @@ end type_architecture;
     <wire from="(10340,7480)" to="(10340,7700)"/>
     <wire from="(10340,7480)" to="(10540,7480)"/>
     <wire from="(10340,7700)" to="(10540,7700)"/>
-    <wire from="(10350,2250)" to="(10350,2290)"/>
-    <wire from="(10360,3210)" to="(10360,3250)"/>
-    <wire from="(10370,4140)" to="(10370,4180)"/>
-    <wire from="(10370,5090)" to="(10370,5130)"/>
     <wire from="(10410,7770)" to="(10410,7800)"/>
     <wire from="(10410,7770)" to="(10450,7770)"/>
     <wire from="(10410,7800)" to="(10490,7800)"/>
