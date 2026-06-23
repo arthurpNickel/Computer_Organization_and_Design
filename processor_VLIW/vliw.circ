@@ -8,6 +8,7 @@
     </tool>
     <tool name="Pin">
       <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
     </tool>
     <tool name="Tunnel">
       <a name="facing" val="north"/>
