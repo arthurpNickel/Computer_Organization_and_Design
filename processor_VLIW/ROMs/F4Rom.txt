@@ -1,0 +1,80 @@
+v3.0 hex words addressed
+
+00: ffffffff
+01: ffffffff
+02: ffffffff
+03: ffffffff
+04: ffffffff
+05: ffffffff
+06: ffffffff
+07: ffffffff
+08: ffffffff
+09: ffffffff
+0A: ffffffff
+0B: ffffffff
+0C: ffffffff
+0D: ffffffff
+0E: ffffffff
+0F: ffffffff
+10: ffffffff
+11: ffffffff    
+12: ffffffff    
+13: ffffffff    
+14: ffffffff    
+15: ffffffff    
+16: ffffffff    
+17: ffffffff    
+18: ffffffff
+19: ffffffff    
+1A: ffffffff    
+1B: ffffffff    
+1C: ffffffff    
+1D: ffffffff    
+1E: ffffffff    
+1F: ffffffff    
+20: ffffffff    
+21: ffffffff    
+22: ffffffff    
+23: ffffffff    
+24: ffffffff    
+25: ffffffff    
+26: ffffffff    
+27: ffffffff    
+28: ffffffff    
+29: ffffffff    
+2A: ffffffff
+2B: ffffffff    
+2C: ffffffff    
+2D: ffffffff    
+2E: ffffffff    
+2F: ffffffff    
+30: ffffffff    
+31: ffffffff    
+32: ffffffff    
+
+33: 60ffffff    ; movh R0,0
+34: 7cffffff    ; movl R0,12
+35: a4ffffff    ; mov R1,R0
+36: 61ffffff    ; movh R0,1
+37: 78ffffff    ; movl R0,8
+38: a8ffffff    ; mov R2,R0
+39: 60ffffff    ; movh R0,0
+3A: 7cffffff    ; movl R0,12
+3B: acffffff    ; mov R3,R0
+3C: 60ffffff    ; movh R0,0
+3D: 7cffffff    ; movl R0,12
+3E: ffff93ff    ; sub R0,R3
+3F: 40ffffff    ; ld R0,R0
+40: 45ffffff    ; ld R1,R1
+41: ffff81ff    ; add R0,R1
+42: 52ffffff    ; st R0,R2
+43: ffff35ff    ; addi R1,1
+44: ffff39ff    ; addi R2,1
+45: ffff3fff    ; addi R3,-1
+46: 64ffffff    ; movh R0,4
+47: 7cffffff    ; movl R0,12
+48: ff0cffff    ; brzr R3,R0
+49: 63ffffff    ; movh R0,3
+4A: 7cffffff    ; movl R0,12
+4B: ff20ffff    ; jr R0
+4C: ffffffff    ; nop

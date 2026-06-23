@@ -1,0 +1,41 @@
+v3.0 hex words addressed
+
+00: ffffffff
+01: ffffffff
+02: ffffffff
+03: ffffffff
+04: ffffffff
+05: ffffffff
+06: ffffffff
+07: ffffffff
+08: ffffffff
+09: ffffffff
+0A: ffffffff
+0B: ffffffff
+0C: ffffffff
+0D: ffffffff
+0E: ffffffff
+0F: ffffffff
+10: ffffffff
+
+11: 60ffffff    ; movh R0,0
+12: 70ffffff    ; movl R0,0
+13: a8ffffff    ; mov R2,R0
+14: a4ffffff    ; mov R1,R0
+15: 60ffffff    ; movh R0,0
+16: 7cffffff    ; movl R0,12
+17: acffffff    ; mov R3,R0
+
+18: 56ff3fff    ; st R1,R2 | addi R3,-1
+19: ffff39ff    ; addi R2,1
+1A: ffff35ff    ; addi R1,1
+
+1B: 62ffffff    ; movh R0,2
+1C: 71ffffff    ; movl R0,1
+
+1D: ff0cffff    ; brzr R3,R0
+
+1E: 61ffffff    ; movh R0,1
+1F: 78ffffff    ; movl R0,8
+
+20: ff20ffff    ; jr R0

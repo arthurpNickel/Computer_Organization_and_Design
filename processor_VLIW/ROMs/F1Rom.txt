@@ -1,0 +1,18 @@
+v3.0 hex words addressed
+
+00: 61ffffff
+01: 78ffffff
+02: a8ffffff
+03: 60ffffff
+04: 70ffffff
+05: a4ffffff
+06: 60ffffff
+07: 7cffffff
+08: acffffff
+09: ffffffff
+0A: ffffffff
+0B: ffffffff
+0C: ffffffff
+0D: ffffffff
+0E: ffffffff
+0F: ffffffff
