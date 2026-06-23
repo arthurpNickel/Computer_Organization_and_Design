@@ -89,7 +89,7 @@
   <lib desc="file#/home/brunoh/Documentos/arquitetura/Computer_Organization_and_Design/processor_VLIW/somadores.circ" name="13"/>
   <main name="VLIW_V2"/>
   <options>
-    <a name="gateUndefined" val="ignore"/>
+    <a name="gateUndefined" val="error"/>
     <a name="simlimit" val="1000"/>
     <a name="simrand" val="0"/>
   </options>
